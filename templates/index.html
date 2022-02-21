@@ -1,26 +1,17 @@
+
 <body>
     <h1> Python Fetch Example</h1>
     <p id='embed'>{{embed}}</p>
     <p id='mylog'/>
 
-    <script>  fetch('/test')
-        .then(function (response) {
-            return response.json();
-        }).then(function (text) {
-            console.log('GET response:');
-            console.log(text.greeting); 
-
+    <script>  
         // index is het woord?
-        var index = 33;
+        var index = "Banaan";
         fetch(`/getdata/${index}`)
         .then(function (response) {
             return response.text();
-        }).then(function (text) {
-            console.log('GET response text:');
-            console.log(text); 
-        });
-        });</script>
+        })</script>
 
 
 
-    <body>
+    </body>
