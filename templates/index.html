@@ -1,8 +1,16 @@
 
 <body>
-    <h1> Python Fetch Example</h1>
+    <h1> Rijm</h1>
     <p id='embed'>{{embed}}</p>
     <p id='mylog'/>
+
+    <form action="/app.py">
+        <label for="fWord">Eerste woord:</label>
+        <input type="text" id="fWord" name="fWord">
+        <label for="sWord">Tweede woord:</label>
+        <input type="text" id="sWord" name="sWord">
+        <input type="submit" value="Verstuur">         
+    </form>
 
     <script>  
         // index is het woord?
@@ -10,7 +18,8 @@
         fetch(`/getdata/${index}`)
         .then(function (response) {
             return response.text();
-        })</script>
+        })
+    </script>
 
 
 
