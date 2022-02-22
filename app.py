@@ -1,5 +1,4 @@
 ########  imports  ##########
-from crypt import methods
 from flask import Flask, jsonify, request, render_template
 app = Flask(__name__)
 
