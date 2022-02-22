@@ -13,10 +13,10 @@ def home_page():
 
 @app.route('/do_something', methods=["POST", "GET"])
 def do_something():
-    userinput ="grappig"
+    userinput ="data"
     example_embed=rijmwoord.rijmwoorden(userinput)
     return render_template('index.html', embed=example_embed)
-    
+
 #############################
 #########  run app  #########
 app.run(debug=True)

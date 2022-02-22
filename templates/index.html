@@ -4,7 +4,7 @@
     <p id='embed'>{{embed}}</p>
     <p id='mylog'/>
 
-    <form action="/do_something" method="POST">
+    <form id="userData">
         <label for="fWord">Eerste woord:</label>
         <input type="text" id="fWord" name="fWord">
         <label for="sWord">Tweede woord:</label>
@@ -17,6 +17,7 @@
             $(function() {
             $('a#myCustomAction').on('click', function(e) {
                 e.preventDefault()
+                var form= $(userData)[0]
                 $.getJSON('/do_something',
                     function(data) {
                         log(data)
@@ -26,7 +27,5 @@
             });
             });
     </script>
-
-
 
     </body>
