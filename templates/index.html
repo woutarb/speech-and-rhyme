@@ -4,25 +4,14 @@
     <p id='embed'>{{embed}}</p>
     <p id='mylog'/>
 
-    <!-- <form action="/do_something" method="POST">
+    <form action="/do_something" method="POST">
         <label for="fWord">Eerste woord:</label>
         <input type="text" id="fWord" name="fWord">
         <label for="sWord">Tweede woord:</label>
         <input type="text" id="sWord" name="sWord">
-        <input type="submit" value="Verstuur">         
-    </form> -->
-    <form>
-    <a href="#" id="myCustomAction"><button>KLIK MIJ VOOR DANK MEMES</button></a>
+        <a href="#" id="myCustomAction"><button>Verstuur</button></a>
     </form>
-    <script>  
-        // index is het woord?
-        var index = "Banaan";
-        fetch(`/getdata/${index}`)
-        .then(function (response) {
-            return response.text();
-        })
-        
-    </script>
+    
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type=text/javascript>
             $(function() {
