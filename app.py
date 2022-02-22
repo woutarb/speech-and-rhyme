@@ -15,6 +15,7 @@ def home_page():
 @app.route('/do_something', methods=["POST", "GET"])
 def do_something():
     print("Je moer")
+    return ("Tevens ook je pa")
 #############################
 #########  run app  #########
 app.run(debug=True)
