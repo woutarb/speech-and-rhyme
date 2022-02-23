@@ -1,5 +1,5 @@
 ########  imports  ##########
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, url_for
 app = Flask(__name__)
 
 import rijmwoord
@@ -13,10 +13,12 @@ def home_page():
 
 @app.route('/do_something', methods=["POST", "GET"])
 def do_something():
-    userinput ="data"
+    userinput ="bloed"
     example_embed=rijmwoord.rijmwoorden(userinput)
     return render_template('index.html', embed=example_embed)
-
+    
+with app.test_request_context():
+    print (url_for('do_something', next='/'))
 #############################
 #########  run app  #########
 app.run(debug=True)
