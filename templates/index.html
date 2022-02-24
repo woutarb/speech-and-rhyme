@@ -30,8 +30,11 @@
     </script>
 
     <script>
-        var userinput
-        fetch(`/${userinput}`)
+        var userinput1 = "geld"
+        var userinput2 = "held"
+        session['userinput1'] = userinput1
+        session['userinput2'] = userinput2
+        fetch(`/${userinput1}`)
         .then(function (response) {
             return response.text();
         }).then(function (text) {

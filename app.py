@@ -1,5 +1,5 @@
 ########  imports  ##########
-from flask import Flask, jsonify, request, render_template, url_for
+from flask import Flask, jsonify, request, render_template, url_for, session, redirect, url_for, escape, request
 app = Flask(__name__)
 
 import rijmwoord
@@ -7,14 +7,25 @@ import rijmwoord
 ######## Data fetch ############
 @app.route('/')
 def home_page():
-    userinput ="grappig"
+    if 'userinput1' in session:
+        userinput1 =session[userinput1]
+        example_embed=rijmwoord.rijmwoorden(userinput1)
+        return render_template('index.html', embed=example_embed)
+    userinput ="voorbeeld"
     example_embed=rijmwoord.rijmwoorden(userinput)
     return render_template('index.html', embed=example_embed)
 
+
 @app.route('/do_something', methods=["POST", "GET"])
 def do_something():
-    userinput ="bloed"
-    example_embed=rijmwoord.rijmwoorden(userinput)
+    if 'userinput1' in session:
+        userinput1 =session[userinput1]
+        example_embed=rijmwoord.rijmwoorden(userinput1)
+        return render_template('index.html', embed=example_embed)
+    userinput1 = request.form.get('fWord')
+    userinput2 = request.form.get('sWord')
+    print (userinput1)
+    example_embed=rijmwoord.rijmwoorden(userinput1)
     return render_template('index.html', embed=example_embed)
     
 with app.test_request_context():
@@ -22,4 +33,7 @@ with app.test_request_context():
 #############################
 #########  run app  #########
 app.run(debug=True)
+
+
+
 
