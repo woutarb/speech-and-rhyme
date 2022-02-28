@@ -12,9 +12,9 @@ def home_page():
     return render_template('index.html', embed=example_embed)
 
 
-@app.route('/secondPage{data}', methods=["POST"])
+@app.route('/secondPage', methods=['POST'])
 def checkRijm():
-    userinput=request.form.get('fword')
+    userinput=request.form.get('fWord')
     if userinput:
         rijm_embed=rijmwoord.rijmwoorden(userinput)
         return render_template('index.html', embed=rijm_embed)
@@ -22,7 +22,7 @@ def checkRijm():
         userinput ="voorbeeld"
         example_embed=rijmwoord.rijmwoorden(userinput)
         return render_template('index.html', embed=example_embed)
-        
+
 #############################
 #########  run app  #########
 app.run(debug=True)
