@@ -1,46 +1,19 @@
+<!DOCTYPE html>
+<head>
 
-<body>
-    <h1> Rijm</h1>
-    <p id='embed'>{{embed}}</p>
-    <p id='mylog'/>
+</head>
+<html>
+    <body>
+        <h1> Rijm</h1>
+        <p id='embed'>{{embed}}</p>
+        <p id='mylog'/>
 
-    <form id="userData" action="">
-        <label for="fWord">Eerste woord:</label>
-        <input type="text" id="fWord" name="fWord">
-        <label for="sWord">Tweede woord:</label>
-        <input type="text" id="sWord" name="sWord">
-        <input type="submit">
-        <a href="#" id="myCustomAction"><button>Verstuur</button></a>
-    </form>
-    
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type=text/javascript>
-            $(function() {
-            $('a#myCustomAction').on('click', function(e) {
-                e.preventDefault()
-                var form= $(userData)[0]
-                $.getJSON('/do_something',
-                    function(data) {
-                        log(data)
-                //do nothing
-                });
-                return false;
-            });
-            });
-    </script>
-
-    <script>
-        var userinput1 = "geld"
-        var userinput2 = "held"
-        session['userinput1'] = userinput1
-        session['userinput2'] = userinput2
-        fetch(`/${userinput1}`)
-        .then(function (response) {
-            return response.text();
-        }).then(function (text) {
-            console.log('GET response text:');
-            console.log(text); 
-        });
-    </script>
-
+        <form id="userData" action="secondpage">
+            <label for="fWord">Eerste woord:</label>
+            <input type="text" id="fWord" name="fWord">
+            <label for="sWord">Tweede woord:</label>
+            <input type="text" id="sWord" name="sWord">
+            <input type="submit">
+        </form>
     </body>
+</html>
