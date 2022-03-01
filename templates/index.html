@@ -10,10 +10,21 @@
 
         <form id="userData" method="post" action="secondPage">
             <label for="fWord">Eerste woord:</label>
-            <input type="text" id="fWord" name="fWord">
+            <input type="text" id="fWord" name="fWord" style="border-style:none;">
             <label for="sWord">Rijm met:</label>
             <input type="text" id="sWord" name="sWord">
             <input type="submit">
         </form>
+        <div id="resultDiv" style="align-items: center; display: none;">
+            <p id="resultP">Het eerste woord en het tweede woord rijmen</p>
+            <div id="result">&nbsp;niet!</div>
+        </div>
+        <script>
+            resultDiv = document.querySelector("#resultDiv");
+            resultContainer = document.querySelector("#result");
+            console.log(resultDiv)
+            console.log(resultContainer);
+
+        </script>
     </body>
 </html>
