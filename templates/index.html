@@ -12,19 +12,45 @@
             <label for="fWord">Eerste woord:</label>
             <input type="text" id="fWord" name="fWord" style="border-style:none;">
             <label for="sWord">Rijm met:</label>
-            <input type="text" id="sWord" name="sWord">
+            <input type="text" id="sWord" name="sWord" style="border-style:none;">
             <input type="submit">
         </form>
         <div id="resultDiv" style="align-items: center; display: none;">
             <p id="resultP">Het eerste woord en het tweede woord rijmen</p>
-            <div id="result">&nbsp;niet!</div>
+            <div id="result"></div>
         </div>
         <script>
-            resultDiv = document.querySelector("#resultDiv");
-            resultContainer = document.querySelector("#result");
-            console.log(resultDiv)
+            var rhymes = document.querySelector("#embed").textContent;
+            var resultDiv = document.querySelector("#resultDiv");
+            var resultContainer = document.querySelector("#result");
+            console.log(resultDiv);
             console.log(resultContainer);
-
+            console.log(rhymes);
+            function comparison(){
+                if(rhymes.indexOf("onzin") >= 0){
+                    return 1;
+                }else{
+                    return 2;
+                }
+                console.log("comparison ran!")
+            }
+            switch(comparison()){
+                case 1:
+                resultDiv.style = "display: inline-flex;align-items: center;"
+                resultContainer.innerHTML = "!"
+                console.log("Case1: " + resultContainer)
+                break;
+                case 2:
+                resultDiv.style = "display: inline-flex;align-items: center;"
+                resultContainer.innerHTML = "&nbsp;niet!"
+                console.log("Case2: " + resultContainer)
+                break;
+                default:
+                resultDiv.style = "display: inline-flex;align-items: center;"
+                resultContainer = "&nbsp;error! Er is mogelijk iets fout gegaan"
+                console.log("Case3: " + resultContainer)
+                break;
+            }
         </script>
     </body>
 </html>
