@@ -13,7 +13,7 @@
             <input type="text" id="fWord" name="fWord" style="border-style:none;">
             <label for="sWord">Rijm met:</label>
             <input type="text" id="sWord" name="sWord" style="border-style:none;">
-            <input type="submit">
+            <input type="submit" onclick="localStorage.setItem('secondWord', form.elements['sWord'].value);">
         </form>
         <div id="resultDiv" style="align-items: center; display: none;">
             <p id="resultP">Het eerste woord en het tweede woord rijmen</p>
@@ -22,11 +22,9 @@
             var rhymes = document.querySelector("#embed").textContent;
             var resultDiv = document.querySelector("#resultDiv");
             var resultP = document.querySelector("#resultP");
-            console.log(resultDiv);
-            console.log(resultP);
-            console.log(rhymes);
+            var userInput = localStorage.getItem("secondWord");
             function comparison(){
-                if(rhymes.indexOf("onzin") >= 0){
+                if(rhymes.indexOf(userInput) >= 0){
                     return 1;
                 }else{
                     return 2;
@@ -37,17 +35,14 @@
                 case 1:
                 resultDiv.style = "display: inline-flex;align-items: center;"
                 resultP.innerHTML += "!"
-                console.log("Case1: " + resultP)
                 break;
                 case 2:
                 resultDiv.style = "display: inline-flex;align-items: center;"
                 resultP.innerHTML += "&nbsp;niet!"
-                console.log("Case2: " + resultP)
                 break;
                 default:
                 resultDiv.style = "display: inline-flex;align-items: center;"
                 resultP += "&nbsp;error! Er is mogelijk iets fout gegaan"
-                console.log("Case3: " + resultP)
                 break;
             }
         </script>
