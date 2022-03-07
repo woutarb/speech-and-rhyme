@@ -1,28 +1,55 @@
-<!DOCTYPE html>
+<!DOCTYPE html lang="nl">
 <head>
-
+    <title>Stemrijmer</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="Wouter Bijnsdorp">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="HTML, CSS, JavaScript, rhyming, Dutch, NL, speech">
+    <meta name="application-name" content="Stemrijmer">
 </head>
 <html>
     <body>
+        <!-- Deze applicatie werkt alleen op chrome voor desktop en Android.-->
         <h1> Rijm</h1>
-        <p id='embed'>{{embed}}</p>
+        <p id='embed' style="display: none">{{embed}}</p>
         <p id='mylog'/>
+        <p class="output"><em>...diagnostic messages</em></p>
 
         <form id="userData" method="post" action="secondPage">
             <label for="fWord">Eerste woord:</label>
-            <input type="text" id="fWord" name="fWord" style="border-style:none;">
+            <input type="text" id="fWord" name="fWord" style="border-style:none;" readonly>
+            <input type="button" value="Spreek in" onclick="console.log(record)">
             <label for="sWord">Rijm met:</label>
-            <input type="text" id="sWord" name="sWord" style="border-style:none;">
+            <input type="text" id="sWord" name="sWord" style="border-style:none;" readonly>
+            <input type="button" value="Spreek in" onclick="console.log(record)">
             <input type="submit" onclick="localStorage.setItem('secondWord', form.elements['sWord'].value);">
         </form>
         <div id="resultDiv" style="align-items: center; display: none;">
             <p id="resultP">Het eerste woord en het tweede woord rijmen</p>
         </div>
+        
         <script>
+            // Speechrecognition variabelen, voed chrome de juiste objecten 'en alle toekomstige implementaties die de features zonder prefix zouden supporten'
+            var SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
+            var SpeechGrammarList = window.SpeechGrammarList || webkitSpeechGrammarList;
+            var SpeechRecognitionEvent = window.SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
+            var words = [];
+            var grammar = '#JSGF V1.0; grammar colors; public <color> = ' + colors.join(' | ') + ' ;'
+
+            // HTML en rijmen gerelateerde variabelen
             var rhymes = document.querySelector("#embed").textContent;
             var resultDiv = document.querySelector("#resultDiv");
             var resultP = document.querySelector("#resultP");
             var userInput = localStorage.getItem("secondWord");
+            var compared = true;
+
+            function record(){
+                return(recognise(content));
+            }
+            function recognise(recording){
+                return 'x';
+            }
+
             function comparison(){
                 if(rhymes.indexOf(userInput) >= 0){
                     return 1;
@@ -31,19 +58,27 @@
                 }
                 console.log("comparison ran!")
             }
-            switch(comparison()){
-                case 1:
-                resultDiv.style = "display: inline-flex;align-items: center;"
-                resultP.innerHTML += "!"
-                break;
-                case 2:
-                resultDiv.style = "display: inline-flex;align-items: center;"
-                resultP.innerHTML += "&nbsp;niet!"
-                break;
-                default:
-                resultDiv.style = "display: inline-flex;align-items: center;"
-                resultP += "&nbsp;error! Er is mogelijk iets fout gegaan"
-                break;
+
+            if (userInput){
+                switch(comparison()){
+                    case 1:
+                    resultDiv.style = "display: inline-flex;align-items: center;"
+                    resultP.innerHTML += "!"
+                    compared = true;
+                    break;
+
+                    case 2:
+                    resultDiv.style = "display: inline-flex;align-items: center;"
+                    resultP.innerHTML += "&nbsp;niet!"
+                    compared = true;
+                    break;
+
+                    default:
+                    resultDiv.style = "display: inline-flex;align-items: center;"
+                    resultP += "&nbsp;error! Er is mogelijk iets fout gegaan"
+                    break;
+                }
+                localStorage.removeItem("secondWord")
             }
         </script>
     </body>

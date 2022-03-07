@@ -7,9 +7,12 @@ import rijmwoord
 ######## Data fetch ############
 @app.route('/')
 def home_page():
-    userinput ="voorbeeld"
-    example_embed=rijmwoord.rijmwoorden(userinput)
-    return render_template('index.html', embed=example_embed)
+    userinput=request.form.get('fWord')
+    if userinput:
+        rijm_embed=rijmwoord.rijmwoorden(userinput)
+        return render_template('index.html', embed=rijm_embed)
+    else:
+        return render_template('index.html', embed='error')
 
 
 @app.route('/secondPage', methods=['POST'])
@@ -19,9 +22,7 @@ def checkRijm():
         rijm_embed=rijmwoord.rijmwoorden(userinput)
         return render_template('index.html', embed=rijm_embed)
     else:
-        userinput ="voorbeeld"
-        example_embed=rijmwoord.rijmwoorden(userinput)
-        return render_template('index.html', embed=example_embed)
+        return render_template('index.html', embed='error')
 
 #############################
 #########  run app  #########
