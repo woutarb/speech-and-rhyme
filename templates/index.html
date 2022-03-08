@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="HTML, CSS, JavaScript, rhyming, Dutch, NL, speech">
     <meta name="application-name" content="Stemrijmer">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
+
 </head>
 <html>
     <body>
@@ -13,42 +15,104 @@
         <h1> Rijm</h1>
         <p id='embed' style="display: none">{{embed}}</p>
         <p id='mylog'/>
-        <p class="output"><em>...diagnostic messages</em></p>
+        <p id="instructions">Druk op een van de knoppen om het woord op te nemen</p>
 
         <form id="userData" method="post" action="secondPage">
             <label for="fWord">Eerste woord:</label>
-            <input type="text" id="fWord" name="fWord" style="border-style:none;" readonly>
-            <input type="button" value="Spreek in" onclick="console.log(record)">
+            <input type="text" id="fWord" name="fWord" style="border-style:none;">
+            <input type="button" style="margin-right: 100%;" id="start-record-btn" value="Spreek in">
+
             <label for="sWord">Rijm met:</label>
-            <input type="text" id="sWord" name="sWord" style="border-style:none;" readonly>
-            <input type="button" value="Spreek in" onclick="console.log(record)">
-            <input type="submit" onclick="localStorage.setItem('secondWord', form.elements['sWord'].value);">
+            <input type="text" id="sWord" name="sWord" style="border-style:none;">
+            <input type="button" style="margin-right: 100%;" id="start-record-btn" value="Spreek in">
+            <input type="submit" style="margin-top: 1.5rem;" onclick="localStorage.setItem('secondWord', form.elements['sWord'].value);">
         </form>
+
         <div id="resultDiv" style="align-items: center; display: none;">
             <p id="resultP">Het eerste woord en het tweede woord rijmen</p>
         </div>
-        
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
         <script>
             // Speechrecognition variabelen, voed chrome de juiste objecten 'en alle toekomstige implementaties die de features zonder prefix zouden supporten'
-            var SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
-            var SpeechGrammarList = window.SpeechGrammarList || webkitSpeechGrammarList;
-            var SpeechRecognitionEvent = window.SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
-            var words = [];
-            var grammar = '#JSGF V1.0; grammar colors; public <color> = ' + colors.join(' | ') + ' ;'
 
-            // HTML en rijmen gerelateerde variabelen
+            try {
+                var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                var recognition = new SpeechRecognition();
+                recognition.lang = 'nl-NL';
+                }
+            catch(e) {
+                console.error(e);
+            }
+
+            var noteTextarea = $("#fWord");;
+            var instructions = $("#instructions");
+            var noteContent ='';
+
+            
+            // Voice Recognition 
+
+            // If false, the recording will stop after a few seconds of silence.
+            // When true, the silence period is longer (about 15 seconds), don't need that with a single word
+            recognition.continuous = false;
+
+            // This block is called every time the Speech APi captures a line. 
+            recognition.onresult = function(event) {
+
+                // event is a SpeechRecognitionEvent object.
+                // It holds all the lines we have captured so far. 
+                // We only need the current one.
+                var current = event.resultIndex;
+
+                // Get a transcript of what was said.
+                var transcript = event.results[current][0].transcript;
+
+                // Add the current transcript to the contents of our Note.
+                // There is a weird bug on mobile, where everything is repeated twice.
+                // There is no official solution so far so we have to handle an edge case.
+                var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
+
+                if(!mobileRepeatBug) {
+                    noteContent += transcript;
+                    noteTextarea.val(noteContent);
+                }
+            };
+
+            recognition.onstart = function() { 
+                instructions.text('Stem herkenning staat aan. Spreek in de microfoon.');
+            }
+
+            recognition.onspeechend = function() {
+                instructions.text('Je was een tijdje stil dus de stem herkenning zette zichzelf uit.');
+            }
+
+            recognition.onerror = function(event) {
+                if(event.error == 'no-speech') {
+                    instructions.text('Ik hoorde niks, probeer het nog eens.');  
+                };
+            }
+
+            //App buttons and input 
+
+            $('#start-record-btn').on('click', function(e) {
+            if (noteContent.length) {
+                noteContent += ' ';
+            }
+            recognition.start();
+            });
+
+            // Sync the text inside the text area with the noteContent variable.
+            noteTextarea.on('input', function() {
+            noteContent = $(this).val();
+            })
+
+            // HTML and rhyme related variables
             var rhymes = document.querySelector("#embed").textContent;
             var resultDiv = document.querySelector("#resultDiv");
             var resultP = document.querySelector("#resultP");
             var userInput = localStorage.getItem("secondWord");
             var compared = true;
-
-            function record(){
-                return(recognise(content));
-            }
-            function recognise(recording){
-                return 'x';
-            }
 
             function comparison(){
                 if(rhymes.indexOf(userInput) >= 0){
