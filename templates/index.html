@@ -12,20 +12,20 @@
 <html>
     <body>
         <!-- Deze applicatie werkt alleen op chrome voor desktop en Android.-->
-        <h1> Rijm</h1>
+        <h1>Rijm</h1>
         <p id='embed' style="display: none">{{embed}}</p>
         <p id='mylog'/>
-        <p id="instructions">Druk op een van de knoppen om het woord op te nemen</p>
+        <p id="instructions">Druk op een van de knoppen om input op te nemen.</p>
 
         <form id="userData" method="post" action="secondPage">
             <label for="fWord">Eerste woord:</label>
-            <input type="text" id="fWord" name="fWord" style="border-style:none;">
+            <input type="text" id="fWord" name="fWord" style="width: 50%;" readonly>
             <input type="button" style="margin-right: 100%;" id="rcrd1" class="start-record-btn" value="Spreek in">
 
-            <label for="sWord">Rijm met:</label>
-            <input type="text" id="sWord" name="sWord" style="border-style:none;">
+            <label for="sWord">Rijmt met:</label>
+            <input type="text" id="sWord" name="sWord" style="width: 50%;" readonly>
             <input type="button" style="margin-right: 100%;" id="rcrd2" class="start-record-btn" value="Spreek in">
-            <input type="submit" style="margin-top: 1.5rem;" onclick="localStorage.setItem('secondWord', form.elements['sWord'].value);">
+            <input type="submit" style="margin-top: 1.5rem;" value="Verstuur" onclick="localStorage.setItem('secondWord', form.elements['sWord'].value);">
         </form>
 
         <div id="resultDiv" style="align-items: center; display: none;">
@@ -35,8 +35,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
         <script>
-            // Speechrecognition variabelen, voed chrome de juiste objecten 'en alle toekomstige implementaties die de features zonder prefix zouden supporten'
-
+            // Making sure speech is supported
             try {
                 var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
                 var recognition = new SpeechRecognition();
@@ -49,7 +48,14 @@
             var noteTextarea = $("#fWord");
             var instructions = $("#instructions");
             var noteContent ='';
-   
+            
+            // HTML and rhyme related variables
+            var rhymes = document.querySelector("#embed").textContent;
+            var resultDiv = document.querySelector("#resultDiv");
+            var resultP = document.querySelector("#resultP");
+            var userInput = localStorage.getItem("secondWord");
+            var compared = true;
+
             // Voice recognition 
 
             // If false, the recording will stop after a few seconds of silence.
@@ -92,8 +98,7 @@
                 };
             }
 
-            //App buttons and input 
-            
+            // Speechs related app buttons and input 
             $('.start-record-btn').on('click', function(e) {
                 if(event.target.id == "rcrd1"){
                     noteTextarea = $("#fWord");
@@ -111,13 +116,7 @@
             noteContent = $(this).val();
             })
 
-            // HTML and rhyme related variables
-            var rhymes = document.querySelector("#embed").textContent;
-            var resultDiv = document.querySelector("#resultDiv");
-            var resultP = document.querySelector("#resultP");
-            var userInput = localStorage.getItem("secondWord");
-            var compared = true;
-
+            // Rhyme checker code
             function comparison(){
                 if(rhymes.indexOf(userInput) >= 0){
                     return 1;
@@ -126,8 +125,10 @@
                 }
                 console.log("comparison ran!")
             }
-
             if (userInput){
+                wordEq =  userInput.trim().split(' ');
+                userInput =wordEq[wordEq.length-1];
+                console.log(userInput);
                 switch(comparison()){
                     case 1:
                     resultDiv.style = "display: inline-flex;align-items: center;"
