@@ -20,11 +20,11 @@
         <form id="userData" method="post" action="secondPage">
             <label for="fWord">Eerste woord:</label>
             <input type="text" id="fWord" name="fWord" style="border-style:none;">
-            <input type="button" style="margin-right: 100%;" id="start-record-btn" value="Spreek in">
+            <input type="button" style="margin-right: 100%;" class="rcrd1" id="start-record-btn" value="Spreek in">
 
             <label for="sWord">Rijm met:</label>
             <input type="text" id="sWord" name="sWord" style="border-style:none;">
-            <input type="button" style="margin-right: 100%;" id="start-record-btn" value="Spreek in">
+            <input type="button" style="margin-right: 100%;" class="rcrd2" id="start-record-btn" value="Spreek in">
             <input type="submit" style="margin-top: 1.5rem;" onclick="localStorage.setItem('secondWord', form.elements['sWord'].value);">
         </form>
 
@@ -45,13 +45,12 @@
             catch(e) {
                 console.error(e);
             }
-
-            var noteTextarea = $("#fWord");;
+            // Voice recognition variables
+            var noteTextarea = $("#fWord");
             var instructions = $("#instructions");
             var noteContent ='';
-
-            
-            // Voice Recognition 
+   
+            // Voice recognition 
 
             // If false, the recording will stop after a few seconds of silence.
             // When true, the silence period is longer (about 15 seconds), don't need that with a single word
@@ -94,11 +93,18 @@
             }
 
             //App buttons and input 
-
+            
             $('#start-record-btn').on('click', function(e) {
-            if (noteContent.length) {
-                noteContent += ' ';
-            }
+                if(event.target.class == "rcrd1"){
+                    noteTextarea = $("#fWord");
+                }else if(event.target.class == "rcrd2"){
+                    noteTextarea = $("#sWord");
+                }else{
+                    console.log("Error " + event.target.value);
+                }
+                if (noteContent.length) {
+                    noteContent += ' ';
+                }
             recognition.start();
             });
 
