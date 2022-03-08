@@ -9,20 +9,31 @@ import rijmwoord
 def home_page():
     userinput=request.form.get('fWord')
     if userinput:
-        rijm_embed=rijmwoord.rijmwoorden(userinput)
-        return render_template('index.html', embed=rijm_embed)
+        userinputString = userinput.split()
+        if len(userinputString) > 1:
+            rijm_embed=rijmwoord.rijmwoorden(userinputString[-1])
+            return render_template('index.html', embed=rijm_embed)
+        else:
+            rijm_embed=rijmwoord.rijmwoorden(userinputString[-1])
+            return render_template('index.html', embed=rijm_embed)
     else:
         return render_template('index.html', embed='error')
 
 
 @app.route('/secondPage', methods=['POST'])
-def checkRijm():
+def rijm():
     userinput=request.form.get('fWord')
     if userinput:
-        rijm_embed=rijmwoord.rijmwoorden(userinput)
-        return render_template('index.html', embed=rijm_embed)
+        userinputString = userinput.split()
+        if len(userinputString) > 1:
+            rijm_embed=rijmwoord.rijmwoorden(userinputString[-1])
+            return render_template('index.html', embed=rijm_embed)
+        else:
+            rijm_embed=rijmwoord.rijmwoorden(userinputString[-1])
+            return render_template('index.html', embed=rijm_embed)
     else:
         return render_template('index.html', embed='error')
+
 
 #############################
 #########  run app  #########
