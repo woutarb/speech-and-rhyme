@@ -73,7 +73,7 @@
                 var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
 
                 if(!mobileRepeatBug) {
-                    noteContent += transcript;
+                    noteContent = transcript;
                     noteTextarea.val(noteContent);
                 }
             };
@@ -102,9 +102,7 @@
                 }else{
                     console.log("Error " + event.target.value);
                 }
-                if (noteContent.length) {
-                    noteContent += ' ';
-                }
+
             recognition.start();
             });
 
