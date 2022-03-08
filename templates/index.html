@@ -20,11 +20,11 @@
         <form id="userData" method="post" action="secondPage">
             <label for="fWord">Eerste woord:</label>
             <input type="text" id="fWord" name="fWord" style="border-style:none;">
-            <input type="button" style="margin-right: 100%;" class="rcrd1" id="start-record-btn" value="Spreek in">
+            <input type="button" style="margin-right: 100%;" id="rcrd1" class="start-record-btn" value="Spreek in">
 
             <label for="sWord">Rijm met:</label>
             <input type="text" id="sWord" name="sWord" style="border-style:none;">
-            <input type="button" style="margin-right: 100%;" class="rcrd2" id="start-record-btn" value="Spreek in">
+            <input type="button" style="margin-right: 100%;" id="rcrd2" class="start-record-btn" value="Spreek in">
             <input type="submit" style="margin-top: 1.5rem;" onclick="localStorage.setItem('secondWord', form.elements['sWord'].value);">
         </form>
 
@@ -94,10 +94,10 @@
 
             //App buttons and input 
             
-            $('#start-record-btn').on('click', function(e) {
-                if(event.target.class == "rcrd1"){
+            $('.start-record-btn').on('click', function(e) {
+                if(event.target.id == "rcrd1"){
                     noteTextarea = $("#fWord");
-                }else if(event.target.class == "rcrd2"){
+                }else if(event.target.id == "rcrd2"){
                     noteTextarea = $("#sWord");
                 }else{
                     console.log("Error " + event.target.value);
