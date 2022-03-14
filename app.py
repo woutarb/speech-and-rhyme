@@ -1,7 +1,9 @@
 ########  imports  ##########
+# flask is needed for the interaction between the scripts and html and the python, it also helps us render the results in the page to use later
 from flask import Flask, jsonify, request, render_template, url_for, session, redirect, url_for, escape, request
 app = Flask(__name__)
 
+# the rhymewoord API is required to rhyme in Dutch
 import rijmwoord
 
 ######## Data fetch ############
