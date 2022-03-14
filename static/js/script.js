@@ -19,6 +19,24 @@ var resultP = document.querySelector("#resultP");
 var userInput = localStorage.getItem("secondWord");
 var compared = true;
 
+// Feature variables
+var mode;
+switch(document.getElementById("title")){
+    case 'Praat en rijm':
+        mode = 1;
+    break;
+
+    case 'Computer rijm':
+        mode = 2;
+    break;
+    
+    case 'Gebruiker rijm':
+        mode = 3;
+    break;
+    
+    default:
+    break;
+}
 // Voice recognition 
 
 // If false, the recording will stop after a few seconds of silence.

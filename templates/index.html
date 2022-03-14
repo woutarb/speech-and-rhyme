@@ -11,30 +11,32 @@
 
 </head>
 <html>
-    <body style="padding: 1rem;">
-        <!-- Deze applicatie werkt alleen op chrome voor desktop en Android.-->
-        <h1>Rijm</h1>
-        <p id='embed' style="display: none">{{embed}}</p>
-        <p id='mylog'/>
-        <p id="instructions">Druk op een van de knoppen om input op te nemen.</p>
+    <body >
+        <main>
+            <!-- Deze applicatie werkt alleen op chrome voor desktop en Android.-->
+            <h1 id="title">Praat en rijm</h1>
+            <p id="embed" style="display: none">{{embed}}</p>
+            <p id="mylog"/>
+            <p id="instructions">Druk op een van de knoppen om input op te nemen.</p>
 
-        <form id="userData" method="post" action="secondPage">
-            <label for="fWord">Eerste woord:</label>
-            <input type="text" id="fWord" name="fWord" style="width: 50%;" readonly>
-            <input type="button" style="margin-right: 100%;" id="rcrd1" class="start-record-btn" value="Spreek in">
+            <form id="userData" method="post" action="secondPage">
+                <label for="fWord">Eerste woord:</label>
+                <input type="text" id="fWord" name="fWord" readonly>
+                <input type="button"  id="rcrd1" class="start-record-btn" value="Spreek in">
 
-            <label for="sWord">Rijmt met:</label>
-            <input type="text" id="sWord" name="sWord" style="width: 50%;" readonly>
-            <input type="button" style="margin-right: 100%;" id="rcrd2" class="start-record-btn" value="Spreek in">
-            <input type="submit" style="margin-top: 1.5rem;" value="Verstuur" onclick="localStorage.setItem('secondWord', form.elements['sWord'].value);">
-        </form>
+                <label for="sWord">Rijmt met:</label>
+                <input type="text" id="sWord" name="sWord" readonly>
+                <input type="button"  id="rcrd2" class="start-record-btn" value="Spreek in">
+                <input type="submit"  value="Verstuur" onclick="localStorage.setItem('secondWord', form.elements['sWord'].value);">
+            </form>
 
-        <div id="resultDiv" style="align-items: center; display: none;">
-            <p id="resultP">Het eerste woord en het tweede woord rijmen</p>
-        </div>
+            <div id="resultDiv" style="display: none;">
+                <p id="resultP">Het eerste woord en het tweede woord rijmen</p>
+            </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-        <script src="static/js/script.js"></script>
+            <script src="static/js/script.js"></script>
+        </main>
     </body>
 </html>
