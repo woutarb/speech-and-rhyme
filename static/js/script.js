@@ -21,22 +21,22 @@ var compared = true;
 
 // Feature variables
 var mode;
-switch(document.getElementById("title")){
-    case 'Praat en rijm':
-        mode = 1;
-    break;
-
-    case 'Computer rijm':
-        mode = 2;
-    break;
-    
-    case 'Gebruiker rijm':
-        mode = 3;
-    break;
-    
-    default:
-    break;
+/* Mode code; WIP
+console.log(document.getElementById("title"));
+if (document.getElementById("title").indexOf('Praat en rijm') >= 0){
+    mode = 1;
+}else if(document.getElementById("title").indexOf('Computer rijm') >= 0){
+    mode = 2;
+}else if(document.getElementById("title").indexOf('Gebruiker rijm') >= 0){
+    mode = 3;
+}else{
+    console.log('title error')
 }
+  */
+
+
+console.log(document.getElementById("title"));
+console.log(mode);
 // Voice recognition 
 
 // If false, the recording will stop after a few seconds of silence.

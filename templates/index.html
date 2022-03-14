@@ -7,12 +7,11 @@
     <meta name="keywords" content="HTML, CSS, JavaScript, rhyming, Dutch, NL, speech">
     <meta name="application-name" content="Stemrijmer">
     <link rel="stylesheet" href="static/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/shoelace-css/1.0.0-beta16/shoelace.css">
 
 </head>
 <html>
-    <body >
-        <main>
+    <body class="center">
+        <main class="page">
             <!-- Deze applicatie werkt alleen op chrome voor desktop en Android.-->
             <h1 id="title">Praat en rijm</h1>
             <p id="embed" style="display: none">{{embed}}</p>
@@ -22,11 +21,12 @@
             <form id="userData" method="post" action="secondPage">
                 <label for="fWord">Eerste woord:</label>
                 <input type="text" id="fWord" name="fWord" readonly>
-                <input type="button"  id="rcrd1" class="start-record-btn" value="Spreek in">
+                <input type="button"  id="rcrd1" class="start-record-btn" value="Spreek">
+                
 
                 <label for="sWord">Rijmt met:</label>
                 <input type="text" id="sWord" name="sWord" readonly>
-                <input type="button"  id="rcrd2" class="start-record-btn" value="Spreek in">
+                <input type="button"  id="rcrd2" class="start-record-btn" value="Spreek">
                 <input type="submit"  value="Verstuur" onclick="localStorage.setItem('secondWord', form.elements['sWord'].value);">
             </form>
 
