@@ -12,12 +12,36 @@ var noteTextarea = $("#fWord");
 var instructions = $("#instructions");
 var noteContent ='';
 
+// Text to speech variables
+buildSpeech(){
+    const SpeechSynthesisUtterance = window.SpeechSynthesisUtterance || window.webkitSpeechSynthesisUtterance
+    const speechSynthesis = window.speechSynthesis || window.webkitspeechSynthesis
+    voices = speechSynthesis.getVoices();
+    speech = new SpeechSynthesisUtterance();
+    speech.lang ='nl-NL';
+}
+
+
 // HTML and rhyme related variables
 var rhymes = document.querySelector("#embed").textContent;
 var resultDiv = document.querySelector("#resultDiv");
 var resultP = document.querySelector("#resultP");
 var userInput = localStorage.getItem("secondWord");
+var result = localStorage.getItem("result");
 var compared = true;
+
+const posPhrases = [
+    'Goed gedaan!',
+    'Netjes!',
+    'Dat rijmt goed!',
+    'Je bent een natuurlijk rijmtalent!'
+  ]
+  const negPhrases = [
+    'Ik weet dat je het kunt!',
+    'Jammer, probeer het nog eens!',
+    'Dit rijmt nog niet goed!',
+    'Helaas, dit rijmt niet'
+  ]
 
 // Feature variables
 var mode;
@@ -34,9 +58,10 @@ if (document.getElementById("title").indexOf('Praat en rijm') >= 0){
 }
   */
 
-
+/*
 console.log(document.getElementById("title"));
 console.log(mode);
+*/
 // Voice recognition 
 
 // If false, the recording will stop after a few seconds of silence.
@@ -97,6 +122,26 @@ noteTextarea.on('input', function() {
 noteContent = $(this).val();
 })
 
+if(result = 'yes'){
+    speak(random(posPhrases));
+}else if(result = 'no'){
+    speak(random(negPhrases));
+}else if(result= 'error'){
+    speak('Error!')
+}
+
+speak(phrase){
+    speech.rate = .8;
+    speech.text = phrase;
+    speechSynthesis.speak(speech);
+}
+
+function random(array){
+    var maxNum = array.length;
+    randomNum = Math.floor(Math.random()*maxNum);
+    return array[randomNum];
+}
+
 // Rhyme checker code
 function comparison(){
     if(rhymes.indexOf(userInput) >= 0){
@@ -107,24 +152,28 @@ function comparison(){
     console.log("comparison ran!")
 }
 if (userInput){
+    localStorage.removeItem("result")
     wordEq =  userInput.trim().split(' ');
     userInput =wordEq[wordEq.length-1];
     switch(comparison()){
         case 1:
         resultDiv.style = "display: inline-flex;align-items: center;"
         resultP.innerHTML += "!"
+        localStorage.setItem("result", 'yes')
         compared = true;
         break;
 
         case 2:
         resultDiv.style = "display: inline-flex;align-items: center;"
         resultP.innerHTML += "&nbsp;niet!"
+        localStorage.setItem("result", 'no')
         compared = true;
         break;
 
         default:
         resultDiv.style = "display: inline-flex;align-items: center;"
         resultP += "&nbsp;error! Er is mogelijk iets fout gegaan"
+        localStorage.setItem("result", 'error')
         break;
     }
     localStorage.removeItem("secondWord")
