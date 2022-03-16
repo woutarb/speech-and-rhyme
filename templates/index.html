@@ -7,35 +7,32 @@
     <meta name="keywords" content="HTML, CSS, JavaScript, rhyming, Dutch, NL, speech">
     <meta name="application-name" content="Stemrijmer">
     <link rel="stylesheet" href="static/css/style.css">
-
+    <link rel="stylesheet" href="https://use.typekit.net/vbp0kef.css">
 </head>
 <html>
-    <body class="center">
+    <body>
         <main class="page">
             <!-- Deze applicatie werkt alleen op chrome voor desktop en Android.-->
-            <h1 id="title">Praat en rijm</h1>
             <p id="embed" style="display: none">{{embed}}</p>
             <p id="mylog"/>
-            <p id="instructions">Druk op een van de knoppen om input op te nemen.</p>
 
-            <form id="userData" method="post" action="secondPage">
-                <label for="fWord">Eerste woord:</label>
-                <input type="text" id="fWord" name="fWord" readonly>
-                <input type="button"  id="rcrd1" class="start-record-btn" value="Spreek">
-                
-
-                <label for="sWord">Rijmt met:</label>
-                <input type="text" id="sWord" name="sWord" readonly>
-                <input type="button"  id="rcrd2" class="start-record-btn" value="Spreek">
-                <input type="submit"  value="Verstuur" onclick="localStorage.setItem('secondWord', form.elements['sWord'].value);">
-            </form>
-
-            <div id="resultDiv" style="display: none;">
-                <p id="resultP">Het eerste woord en het tweede woord rijmen</p>
+            <div id="resultDiv" ">
+                <h1 id="resultH">Zeg een woord</h1>
+                <h1 id="resultP"></h1>
             </div>
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <form id="userData" method="post" action="result">
+                <input type="text" id="fWord" name="fWord" readonly>
+                <input type="button"  id="rcrd1" class="start-record-btn">
 
+                <input type="text" id="sWord" name="sWord" readonly>
+                <input type="button"  id="rcrd2" class="start-record-btn">
+                <input type="submit"  value="Verstuur" onclick="localStorage.setItem('firstWord', form.elements['fWord'].value); localStorage.setItem('secondWord', form.elements['sWord'].value);">
+            </form>
+            <a href="javascript:history.back()" rel="prev">A</a>
+            <p id="instructions">Druk op de knop en spreek</p>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script src="static/js/script.js"></script>
         </main>
     </body>

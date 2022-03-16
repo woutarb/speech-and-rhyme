@@ -12,6 +12,7 @@ var noteTextarea = $("#fWord");
 var instructions = $("#instructions");
 var noteContent ='';
 
+/*
 // Text to speech variables
 buildSpeech(){
     const SpeechSynthesisUtterance = window.SpeechSynthesisUtterance || window.webkitSpeechSynthesisUtterance
@@ -20,13 +21,15 @@ buildSpeech(){
     speech = new SpeechSynthesisUtterance();
     speech.lang ='nl-NL';
 }
-
+*/
 
 // HTML and rhyme related variables
 var rhymes = document.querySelector("#embed").textContent;
 var resultDiv = document.querySelector("#resultDiv");
+var resultH = document.querySelector('#resultH');
 var resultP = document.querySelector("#resultP");
-var userInput = localStorage.getItem("secondWord");
+var userInput1 = localStorage.getItem("firstWord");
+var userInput2 = localStorage.getItem("secondWord");
 var result = localStorage.getItem("result");
 var compared = true;
 
@@ -91,16 +94,16 @@ recognition.onresult = function(event) {
 };
 
 recognition.onstart = function() { 
-    instructions.text('Stem herkenning staat aan. Spreek in de microfoon.');
+    instructions.text('Ik hoor je');
 }
 
 recognition.onspeechend = function() {
-    instructions.text('Je was een tijdje stil dus de stem herkenning zette zichzelf uit.');
+    instructions.text('Te lang stil, microfoon staat uit');
 }
 
 recognition.onerror = function(event) {
     if(event.error == 'no-speech') {
-        instructions.text('Ik hoorde niks, probeer het nog eens.');  
+        instructions.text('Ik hoorde je niet, probeer het nog eens');  
     };
 }
 
@@ -121,7 +124,7 @@ recognition.start();
 noteTextarea.on('input', function() {
 noteContent = $(this).val();
 })
-
+/*
 if(result = 'yes'){
     speak(random(posPhrases));
 }else if(result = 'no'){
@@ -135,7 +138,7 @@ speak(phrase){
     speech.text = phrase;
     speechSynthesis.speak(speech);
 }
-
+*/
 function random(array){
     var maxNum = array.length;
     randomNum = Math.floor(Math.random()*maxNum);
@@ -144,37 +147,53 @@ function random(array){
 
 // Rhyme checker code
 function comparison(){
-    if(rhymes.indexOf(userInput) >= 0){
+    if(rhymes.indexOf(userInput2) >= 0){
         return 1;
     }else{
         return 2;
     }
     console.log("comparison ran!")
 }
-if (userInput){
+
+if (userInput2){
+    if(window.location.href.includes("result")){
+    instructions[0].outerText ="Nog een keer!";
+    document.querySelector("form").style="display:none;"
+    document.querySelector("a").style="display: block;"
+}
+
     localStorage.removeItem("result")
-    wordEq =  userInput.trim().split(' ');
-    userInput =wordEq[wordEq.length-1];
-    switch(comparison()){
-        case 1:
-        resultDiv.style = "display: inline-flex;align-items: center;"
-        resultP.innerHTML += "!"
+    userInput1 = wordCleanup(userInput1);
+    userInput2 = wordCleanup(userInput2);
+switch(comparison()){
+    case 1:
+        resultH.innerHTML = "Bravo!"
+        resultP.innerHTML = userInput2 + ' rijmt op ' + userInput1;
         localStorage.setItem("result", 'yes')
+        document.body.style.backgroundColor = "#a500ba";
         compared = true;
-        break;
+    break;
 
-        case 2:
-        resultDiv.style = "display: inline-flex;align-items: center;"
-        resultP.innerHTML += "&nbsp;niet!"
+    case 2:
+        resultH.innerHTML = "Helaas!"
+        resultP.innerHTML = userInput2 + ' rijmt niet op ' + userInput1;
         localStorage.setItem("result", 'no')
+        document.body.style.backgroundColor = "#ed0707";
         compared = true;
-        break;
+    break;
 
-        default:
-        resultDiv.style = "display: inline-flex;align-items: center;"
-        resultP += "&nbsp;error! Er is mogelijk iets fout gegaan"
+    default:
+        resultH = "Error!"
+        resultP.innerHTML ="Er ging iets mis";
         localStorage.setItem("result", 'error')
-        break;
+        document.body.style.backgroundColor = "#FFDA00";
+    break;
     }
-    localStorage.removeItem("secondWord")
+    localStorage.removeItem('firstWord');
+    localStorage.removeItem('secondWord');
+}
+
+function wordCleanup(input){
+    wordEq =  input.trim().split(' ');
+    return wordEq[wordEq.length-1]
 }

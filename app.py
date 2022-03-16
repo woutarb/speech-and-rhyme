@@ -22,7 +22,7 @@ def home_page():
         return render_template('index.html', embed='error')
 
 
-@app.route('/secondPage', methods=['POST'])
+@app.route('/result', methods=['POST'])
 def rijm():
     userinput=request.form.get('fWord')
     if userinput:
