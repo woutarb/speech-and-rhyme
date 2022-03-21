@@ -166,6 +166,8 @@ if (userInput2){
     localStorage.removeItem("result")
     userInput1 = wordCleanup(userInput1);
     userInput2 = wordCleanup(userInput2);
+
+
 switch(comparison()){
     case 1:
         resultH.innerHTML = "Bravo!"
@@ -180,6 +182,8 @@ switch(comparison()){
         resultP.innerHTML = userInput2 + ' rijmt niet op ' + userInput1;
         localStorage.setItem("result", 'no')
         document.body.style.backgroundColor = "#ed0707";
+        document.querySelector("a").style="background-color: #a500ba; display: block;";
+    
         compared = true;
     break;
 

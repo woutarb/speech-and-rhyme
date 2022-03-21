@@ -1,3 +1,34 @@
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 400px) {
+    h1{
+        font-size: 2.5em;
+    }
+    .start-record-btn{
+        height: 50px;
+        width: 50px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 400px) {
+    h1{
+        font-size: 5em;
+    }
+    .start-record-btn{
+        height: 95px;
+        width: 95px;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .start-record-btn{
+        height: 150px;
+        width: 150px;
+    }
+}
+
+
 body{
     background-color: #0465a7;
     text-align: center;
@@ -5,7 +36,6 @@ body{
 
 h1{
     color: #ffda00;
-    font-size: 5em;
     font-family: questa-sans;
 }
 
@@ -40,8 +70,6 @@ input[type=text]{
     background-position: center center;
     background-color: #fd6b00;
     background-size: 50% 50%;
-    width: 40px;
-    height: 40px;
     color: transparent;
     border-radius: 50%;
     border-style: solid;
@@ -75,6 +103,7 @@ input[type=submit]{
     width: 50px;
     color: transparent; 
     margin: 3rem;
+    cursor: pointer;
 }
 
 #back{
@@ -91,4 +120,6 @@ input[type=submit]{
     width: 50px;
     color: transparent; 
     transform: rotate(180deg);
+    cursor: pointer;
+    margin: auto;
 }
