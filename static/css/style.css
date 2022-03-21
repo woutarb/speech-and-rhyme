@@ -40,8 +40,8 @@ input[type=text]{
     background-position: center center;
     background-color: #fd6b00;
     background-size: 50% 50%;
-    width: 30;
-    height: 30;
+    width: 40px;
+    height: 40px;
     color: transparent;
     border-radius: 50%;
     border-style: solid;
@@ -61,10 +61,34 @@ input[type=text]{
     background-color: #ed0707;
 }
 
-a{
-    display: none;
+input[type=submit]{
+    background-image: url(../images/button.png);
+    background-repeat: no-repeat;
+    background-size: 60% 100%;
+    background-position: center center;
+    background-color: transparent;
+    border-color: white;
+    border-style: solid;
+    border-width: 0.5rem;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    color: transparent; 
+    margin: 3rem;
 }
 
-.returnguide{
+#back{
     display: none;
+    background-image: url(../images/button.png);
+    background-repeat: no-repeat;
+    background-size: 60% 100%;
+    background-position: center center;
+    border-color: white;
+    border-style: solid;
+    border-width: 0.5rem;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    color: transparent; 
+    transform: rotate(180deg);
 }

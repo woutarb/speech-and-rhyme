@@ -157,9 +157,10 @@ function comparison(){
 
 if (userInput2){
     if(window.location.href.includes("result")){
-    instructions[0].outerText ="Nog een keer!";
+    instructions[0].innerText ="Nog een keer!";
     document.querySelector("form").style="display:none;"
     document.querySelector("a").style="display: block;"
+    resultDiv.style="height: 70%;"
 }
 
     localStorage.removeItem("result")
