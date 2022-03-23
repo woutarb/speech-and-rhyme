@@ -88,7 +88,7 @@ noteTextarea.on('input', function() {
 
 // Rhyme checker code
 function comparison(){
-    if(rhymes.indexOf(userInput2) >= 0){
+    if(rhymes.indexOf(userInput2) >= 0 && userInput1 !== userInput2){
         return 1;
     }else{
         return 2;
