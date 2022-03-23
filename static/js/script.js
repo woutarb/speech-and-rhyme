@@ -22,6 +22,8 @@ var userInput2 = localStorage.getItem("secondWord");
 var result = localStorage.getItem("result");
 var form1 =document.querySelector("#userData");
 var form2 =document.querySelector("#userData2");
+var continueBtn1 = document.getElementById('nonPoster1');
+var continueBtn2 = document.getElementById('nonPoster2');
 var compared = true;
 
 
@@ -74,7 +76,7 @@ $('.start-record-btn').on('click', function(e) {
     }else if(e.target.id == "rcrd2"){
         noteTextarea = $("#sWord");
     }else{
-        console.log("Error " + event.target.value);
+        console.log("Error " + e.target.value);
     }
 
 recognition.start();
@@ -146,3 +148,17 @@ function wordCleanup(input){
     wordEq =  input.trim().split(' ');
     return wordEq[wordEq.length-1]
 }
+continueBtn1.addEventListener("click", function(){ 
+    localStorage.setItem('firstWord', wordCleanup(document.forms['userData'].elements['fWord'].value)); 
+    document.getElementById('resultH').innerHTML = 'Welk woord rijmt op ' + localStorage.getItem('firstWord') + '?';
+    document.getElementById('userData').style='display: none;';
+    document.getElementById('userData2').style='display: block;';
+});
+
+continueBtn2.addEventListener("click", function(){ 
+    localStorage.setItem('secondWord', wordCleanup(document.forms['userData2'].elements['sWord'].value)); 
+    document.getElementById('userData2').style='display: none'; 
+    document.getElementById('userData3').style='display: block'; 
+    document.getElementById('resultH').innerHTML = 'Controleer nu of ' + localStorage.getItem('firstWord') + ' en ' + localStorage.getItem('secondWord') + ' rijmen!';
+    document.forms['userData3'].elements['fWord'].value=localStorage.getItem('firstWord'); 
+});

@@ -25,20 +25,12 @@
             <form id="userData" style="display:block;" method="post" action="result">
                 <input type="text" id="fWord" name="fWord" readonly required>
                 <input type="button"  id="rcrd1" class="start-record-btn">
-                <input type="button" id="nonPoster" class = "continue" onclick="
-                localStorage.setItem('firstWord', form.elements['fWord'].value); 
-                document.getElementById('userData').style='display: none;'; 
-                document.getElementById('userData2').style='display: block;';">
+                <input type="button" id="nonPoster1" class = "continue">
             </form>
             <form id="userData2">
                 <input type="text" id="sWord" name="sWord" readonly required>
                 <input type="button"  id="rcrd2" class="start-record-btn">
-                <input type="button" class="continue" onclick="
-                localStorage.setItem('secondWord', form.elements['sWord'].value); 
-                document.getElementById('userData2').style='display: none'; 
-                document.getElementById('userData3').style='display: block'; 
-                document.forms['userData3'].elements['fWord'].value=localStorage.getItem('firstWord'); 
-                ">
+                <input type="button" id = 'nonPoster2' class="continue">
             </form>
             <form method="post" action="result" id="userData3" value="">
                 <input type="text" id="fWord" name="fWord" style="display: none;" readonly required >

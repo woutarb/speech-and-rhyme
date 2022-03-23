@@ -63,16 +63,17 @@ input[type=text]{
 
 .start-record-btn{
     background-image: url(../images/mic.svg);
-    cursor: pointer;
     background-repeat: no-repeat;
     background-position: center center;
     background-color: #fd6b00;
     background-size: 50% 50%;
-    color: transparent;
     border-radius: 50%;
     border-style: solid;
     border-color: transparent;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    cursor: pointer;
+    color: transparent;
+    display: block;
 }
 
 .start-record-btn:hover{
