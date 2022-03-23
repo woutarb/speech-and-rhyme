@@ -22,8 +22,12 @@ var userInput2 = localStorage.getItem("secondWord");
 var result = localStorage.getItem("result");
 var form1 =document.querySelector("#userData");
 var form2 =document.querySelector("#userData2");
+var continueBtns = document.getElementsByClassName('continue');
 var continueBtn1 = document.getElementById('nonPoster1');
 var continueBtn2 = document.getElementById('nonPoster2');
+var rcdBtns = document.getElementsByClassName('start-record-btn');
+var continueAudio = new Audio('static/sound/sOption2.mp3');
+var recordAudio = new Audio('static/sound/sOption1.mp3');
 var compared = true;
 
 
@@ -148,6 +152,8 @@ function wordCleanup(input){
     wordEq =  input.trim().split(' ');
     return wordEq[wordEq.length-1]
 }
+
+//Event listeners
 continueBtn1.addEventListener("click", function(){ 
     localStorage.setItem('firstWord', wordCleanup(document.forms['userData'].elements['fWord'].value)); 
     document.getElementById('resultH').innerHTML = 'Welk woord rijmt op ' + localStorage.getItem('firstWord') + '?';
@@ -162,3 +168,15 @@ continueBtn2.addEventListener("click", function(){
     document.getElementById('resultH').innerHTML = 'Controleer nu of ' + localStorage.getItem('firstWord') + ' en ' + localStorage.getItem('secondWord') + ' rijmen!';
     document.forms['userData3'].elements['fWord'].value=localStorage.getItem('firstWord'); 
 });
+
+for(var a = 0; a < continueBtns.length; a++){
+    continueBtns[a].addEventListener("click", function(){
+        audio.play();
+    })
+}
+
+for(var a = 0; a < rcdBtns.length; a++){
+    rcdBtns[a].addEventListener("click", function(){
+        audio.play();
+    })
+}

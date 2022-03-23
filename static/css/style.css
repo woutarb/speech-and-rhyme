@@ -4,6 +4,10 @@
         font-size: 2.5em;
     }
     .start-record-btn{
+        height: 150px;
+        width: 150px;
+    }
+    .continue{
         height: 50px;
         width: 50px;
     }
@@ -15,14 +19,22 @@
         font-size: 5em;
     }
     .start-record-btn{
-        height: 95px;
-        width: 95px;
+        height: 195px;
+        width: 195px;
+    }
+    .continue{
+        height: 150px;
+        width: 150px;
     }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     .start-record-btn{
+        height: 350px;
+        width: 350px;
+    }
+    .continue{
         height: 150px;
         width: 150px;
     }
@@ -82,7 +94,6 @@ input[type=text]{
 }
 
 .start-record-btn:active{
-    /* wip https://stackoverflow.com/questions/34186640/button-active-using-javascript-and-css */
     border-width: 1em;
     border-color: black;
     background-color: #ed0707;
@@ -98,27 +109,13 @@ input[type=text]{
     border-style: solid;
     border-width: 0.5rem;
     border-radius: 50%;
-    height: 50px;
-    width: 50px;
     color: transparent; 
     margin: 3rem;
     cursor: pointer;
 }
 
 #back{
-    display: none;
-    background-image: url(../images/button.png);
-    background-repeat: no-repeat;
-    background-size: 60% 100%;
-    background-position: center center;
-    border-color: white;
-    border-style: solid;
-    border-width: 0.5rem;
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
-    color: transparent; 
     transform: rotate(180deg);
-    cursor: pointer;
     margin: auto;
+    display: none;
 }
