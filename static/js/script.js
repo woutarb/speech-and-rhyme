@@ -24,48 +24,6 @@ var form1 =document.querySelector("#userData");
 var form2 =document.querySelector("#userData2");
 var compared = true;
 
-/*
-// Text to speech variables
-buildSpeech(){
-    const SpeechSynthesisUtterance = window.SpeechSynthesisUtterance || window.webkitSpeechSynthesisUtterance
-    const speechSynthesis = window.speechSynthesis || window.webkitspeechSynthesis
-    voices = speechSynthesis.getVoices();
-    speech = new SpeechSynthesisUtterance();
-    speech.lang ='nl-NL';
-}
-const posPhrases = [
-    'Goed gedaan!',
-    'Netjes!',
-    'Dat rijmt goed!',
-    'Je bent een natuurlijk rijmtalent!'
-  ]
-  const negPhrases = [
-    'Ik weet dat je het kunt!',
-    'Jammer, probeer het nog eens!',
-    'Dit rijmt nog niet goed!',
-    'Helaas, dit rijmt niet'
-  ]
-*/
-
-/* Mode code; WIP
-var mode;
-console.log(document.getElementById("title"));
-if (document.getElementById("title").indexOf('Praat en rijm') >= 0){
-    mode = 1;
-}else if(document.getElementById("title").indexOf('Computer rijm') >= 0){
-    mode = 2;
-}else if(document.getElementById("title").indexOf('Gebruiker rijm') >= 0){
-    mode = 3;
-}else{
-    console.log('title error')
-}
-  */
-
-/*
-console.log(document.getElementById("title"));
-console.log(mode);
-*/
-
 
 // Voice recognition 
 
@@ -127,27 +85,6 @@ noteTextarea.on('input', function() {
     noteContent = $(this).val();
 })
 
-/*
-if(result = 'yes'){
-    speak(random(posPhrases));
-}else if(result = 'no'){
-    speak(random(negPhrases));
-}else if(result= 'error'){
-    speak('Error!')
-}
-
-speak(phrase){
-    speech.rate = .8;
-    speech.text = phrase;
-    speechSynthesis.speak(speech);
-}
-
-function random(array){
-    var maxNum = array.length;
-    randomNum = Math.floor(Math.random()*maxNum);
-    return array[randomNum];
-}
-*/
 
 // Rhyme checker code
 function comparison(){
@@ -158,7 +95,7 @@ function comparison(){
     }
     console.log("comparison ran!")
 }
-
+// check that there's userINput, and display the result page
 if (userInput2 != null || NaN){
     if(window.location.href.includes("result")){
     instructions[0].innerText ="Nog een keer!";
@@ -168,12 +105,12 @@ if (userInput2 != null || NaN){
     document.querySelector("a").style="display: block;"
     resultDiv.style="height: 70%;"
 }
-
+// empty cookies so it doesnt always open the results aftwards
     localStorage.removeItem("result")
     userInput1 = wordCleanup(userInput1);
     userInput2 = wordCleanup(userInput2);
 
-
+// switch case for displaying succesfull or not
 switch(comparison()){
     case 1:
         resultH.innerHTML = "Bravo!"
@@ -189,10 +126,10 @@ switch(comparison()){
         localStorage.setItem("result", 'no')
         document.body.style.backgroundColor = "#ed0707";
         document.querySelector("a").style="background-color: #a500ba; display: block;";
-    
         compared = true;
     break;
 
+// error case
     default:
         resultH = "Error!"
         resultP.innerHTML ="Er ging iets mis";
@@ -200,10 +137,11 @@ switch(comparison()){
         document.body.style.backgroundColor = "#FFDA00";
     break;
     }
+// emptying out the storage 
     localStorage.removeItem('firstWord');
     localStorage.removeItem('secondWord');
 }
-
+// Making sure the last word is grabbed, no spaces, et cetera
 function wordCleanup(input){
     wordEq =  input.trim().split(' ');
     return wordEq[wordEq.length-1]
