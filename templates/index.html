@@ -22,15 +22,29 @@
                 <h1 id="resultP"></h1>
             </div>
 
-            <form id="userData" method="post" action="result">
+            <form id="userData" style="display:block;" method="post" action="result">
                 <input type="text" id="fWord" name="fWord" readonly required>
                 <input type="button"  id="rcrd1" class="start-record-btn">
-
+                <input type="button" id="nonPoster" class = "continue" onclick="
+                localStorage.setItem('firstWord', form.elements['fWord'].value); 
+                document.getElementById('userData').style='display: none;'; 
+                document.getElementById('userData2').style='display: block;';">
+            </form>
+            <form id="userData2">
                 <input type="text" id="sWord" name="sWord" readonly required>
                 <input type="button"  id="rcrd2" class="start-record-btn">
-                <input type="submit"  value="Verstuur" onclick="localStorage.setItem('firstWord', form.elements['fWord'].value); localStorage.setItem('secondWord', form.elements['sWord'].value);">
+                <input type="button" class="continue" onclick="
+                localStorage.setItem('secondWord', form.elements['sWord'].value); 
+                document.getElementById('userData2').style='display: none'; 
+                document.getElementById('userData3').style='display: block'; 
+                document.forms['userData3'].elements['fWord'].value=localStorage.getItem('firstWord'); 
+                ">
             </form>
-            <a id="back" href="javascript:history.back()" rel="prev">A</a>
+            <form method="post" action="result" id="userData3" value="">
+                <input type="text" id="fWord" name="fWord" style="display: none;" readonly required >
+                <input type="submit" id="poster" class="continue" >
+            </form>
+            <a id="back" href="javascript:history.back()" rel="prev"></a>
             <p id="instructions">Druk op de knop en spreek</p>
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

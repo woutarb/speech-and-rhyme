@@ -12,6 +12,18 @@ var noteTextarea = $("#fWord");
 var instructions = $("#instructions");
 var noteContent ='';
 
+// HTML and rhyme related variables
+var rhymes = document.querySelector("#embed").textContent;
+var resultDiv = document.querySelector("#resultDiv");
+var resultH = document.querySelector('#resultH');
+var resultP = document.querySelector("#resultP");
+var userInput1 = localStorage.getItem("firstWord");
+var userInput2 = localStorage.getItem("secondWord");
+var result = localStorage.getItem("result");
+var form1 =document.querySelector("#userData");
+var form2 =document.querySelector("#userData2");
+var compared = true;
+
 /*
 // Text to speech variables
 buildSpeech(){
@@ -21,18 +33,6 @@ buildSpeech(){
     speech = new SpeechSynthesisUtterance();
     speech.lang ='nl-NL';
 }
-*/
-
-// HTML and rhyme related variables
-var rhymes = document.querySelector("#embed").textContent;
-var resultDiv = document.querySelector("#resultDiv");
-var resultH = document.querySelector('#resultH');
-var resultP = document.querySelector("#resultP");
-var userInput1 = localStorage.getItem("firstWord");
-var userInput2 = localStorage.getItem("secondWord");
-var result = localStorage.getItem("result");
-var compared = true;
-
 const posPhrases = [
     'Goed gedaan!',
     'Netjes!',
@@ -45,10 +45,10 @@ const posPhrases = [
     'Dit rijmt nog niet goed!',
     'Helaas, dit rijmt niet'
   ]
+*/
 
-// Feature variables
-var mode;
 /* Mode code; WIP
+var mode;
 console.log(document.getElementById("title"));
 if (document.getElementById("title").indexOf('Praat en rijm') >= 0){
     mode = 1;
@@ -65,6 +65,8 @@ if (document.getElementById("title").indexOf('Praat en rijm') >= 0){
 console.log(document.getElementById("title"));
 console.log(mode);
 */
+
+
 // Voice recognition 
 
 // If false, the recording will stop after a few seconds of silence.
@@ -109,9 +111,9 @@ recognition.onerror = function(event) {
 
 // Speechs related app buttons and input 
 $('.start-record-btn').on('click', function(e) {
-    if(event.target.id == "rcrd1"){
+    if(e.target.id == "rcrd1"){
         noteTextarea = $("#fWord");
-    }else if(event.target.id == "rcrd2"){
+    }else if(e.target.id == "rcrd2"){
         noteTextarea = $("#sWord");
     }else{
         console.log("Error " + event.target.value);
@@ -122,8 +124,9 @@ recognition.start();
 
 // Sync the text inside the text area with the noteContent variable.
 noteTextarea.on('input', function() {
-noteContent = $(this).val();
+    noteContent = $(this).val();
 })
+
 /*
 if(result = 'yes'){
     speak(random(posPhrases));
@@ -138,12 +141,13 @@ speak(phrase){
     speech.text = phrase;
     speechSynthesis.speak(speech);
 }
-*/
+
 function random(array){
     var maxNum = array.length;
     randomNum = Math.floor(Math.random()*maxNum);
     return array[randomNum];
 }
+*/
 
 // Rhyme checker code
 function comparison(){
@@ -155,10 +159,12 @@ function comparison(){
     console.log("comparison ran!")
 }
 
-if (userInput2){
+if (userInput2 != null || NaN){
     if(window.location.href.includes("result")){
     instructions[0].innerText ="Nog een keer!";
-    document.querySelector("form").style="display:none;"
+    for(i=0; i< document.querySelectorAll("form").length; i++){
+        document.querySelectorAll("form")[i].style="display:none;";
+    }
     document.querySelector("a").style="display: block;"
     resultDiv.style="height: 70%;"
 }

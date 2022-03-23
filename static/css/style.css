@@ -46,12 +46,10 @@ p{
 }
 
 form{
+    display: none;
     text-align: -webkit-center;
 }
 
-input{
-    display: block;
-}
 
 input[type=text]{
     background-color: #0465a7;
@@ -78,18 +76,18 @@ input[type=text]{
 }
 
 .start-record-btn:hover{
-    border-width: 2px;
+    border-width: 3px;
     border-color: black;
 }
 
 .start-record-btn:active{
     /* wip https://stackoverflow.com/questions/34186640/button-active-using-javascript-and-css */
-    border-width: 3px;
+    border-width: 4px;
     border-color: black;
     background-color: #ed0707;
 }
 
-input[type=submit]{
+.continue{
     background-image: url(../images/button.png);
     background-repeat: no-repeat;
     background-size: 60% 100%;
