@@ -46,22 +46,21 @@ body{
     text-align: center;
 }
 
-h1{
-    color: #ffda00;
-    font-family: questa-sans;
-}
-
 p{
     color: white;
     font-family: bello-caps;
     font-size: 3em;
 }
 
+h1{
+    color: #ffda00;
+    font-family: questa-sans;
+}
+
 form{
     display: none;
     text-align: -webkit-center;
 }
-
 
 input[type=text]{
     background-color: #0465a7;
@@ -118,4 +117,8 @@ input[type=text]{
     transform: rotate(180deg);
     margin: auto;
     display: none;
+}
+
+#instructions{
+    margin: 0;
 }
