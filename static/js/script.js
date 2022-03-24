@@ -7,6 +7,7 @@ try {
 catch(e) {
     console.error(e);
 }
+
 // Voice recognition variables
 var noteTextarea = $("#fWord");
 var instructions = $("#instructions");
@@ -92,7 +93,7 @@ noteTextarea.on('input', function() {
 })
 
 
-// Rhyme checker code
+// Rhyme checker code: checks the second userInput against the invisible embed to check if it rhymes according to the API, if it's not the same word and has a place in the array of the embed; it does.
 function comparison(){
     if(rhymes.indexOf(userInput2) >= 0 && userInput1 !== userInput2){
         return 1;
@@ -116,7 +117,7 @@ if (userInput2 != null || NaN){
     userInput1 = wordCleanup(userInput1);
     userInput2 = wordCleanup(userInput2);
 
-// switch case for displaying succesfull or not
+// switch case for displaying 'succesful' or not
 switch(comparison()){
     case 1:
         resultH.innerHTML = "Bravo!"
@@ -153,7 +154,7 @@ function wordCleanup(input){
     return wordEq[wordEq.length-1]
 }
 
-//Event listeners
+//Event listeners for the form steps, to make sure they work gradually
 continueBtn1.addEventListener("click", function(){ 
     localStorage.setItem('firstWord', wordCleanup(document.forms['userData'].elements['fWord'].value)); 
     document.getElementById('resultH').innerHTML = 'Welk woord rijmt op ' + localStorage.getItem('firstWord') + '?';
@@ -168,15 +169,3 @@ continueBtn2.addEventListener("click", function(){
     document.getElementById('resultH').innerHTML = 'Controleer nu of ' + localStorage.getItem('firstWord') + ' en ' + localStorage.getItem('secondWord') + ' rijmen!';
     document.forms['userData3'].elements['fWord'].value=localStorage.getItem('firstWord'); 
 });
-
-for(var a = 0; a < continueBtns.length; a++){
-    continueBtns[a].addEventListener("click", function(){
-        audio.play();
-    })
-}
-
-for(var a = 0; a < rcdBtns.length; a++){
-    rcdBtns[a].addEventListener("click", function(){
-        audio.play();
-    })
-}

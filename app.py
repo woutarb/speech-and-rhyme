@@ -8,9 +8,11 @@ import rijmwoord
 
 ######## Data fetch ############
 @app.route('/')
+# I am aware this is the same function twice, but I am very much not familiar with Python, and ran out of hours to spend in this file
 def home_page():
     userinput=request.form.get('fWord')
     if userinput:
+        # if there's any input, the input will be split and the last word will be used
         userinputString = userinput.split()
         if len(userinputString) > 1:
             rijm_embed=rijmwoord.rijmwoorden(userinputString[-1])
@@ -39,5 +41,6 @@ def rijm():
 
 #############################
 #########  run app  #########
+# The if is needed for deployment
 if __name__ == '__main__':
     app.run()

@@ -7,21 +7,25 @@
     <meta name="keywords" content="HTML, CSS, JavaScript, rhyming, Dutch, NL, speech">
     <meta name="application-name" content="Stemrijmer">
     <link rel="stylesheet" href="static/css/style.css">
+    <!--Typekit by Yuri Westplat, icon by me-->
     <link rel="stylesheet" href="https://use.typekit.net/vbp0kef.css">
     <link rel="icon" type="image/x-icon" href="/static/images/mic.svg">
 </head>
 <html>
     <body>
         <main class="page">
-            <!-- Deze applicatie werkt alleen op chrome voor desktop en Android.-->
+            <!-- This application only works on chrome for desktop & Android.-->
+            <!-- The embed is the invisible field that recieves the words that rhyme with the user's first input-->
             <p id="embed" style="display: none">{{embed}}</p>
             <p id="mylog"/>
 
+            <!--The resultdiv prompts the user-->
             <div id="resultDiv" ">
                 <h1 id="resultH">Zeg een woord</h1>
                 <h1 id="resultP"></h1>
             </div>
 
+            <!-- The forms are different steps, first word, second word, and submit-->
             <form id="userData" style="display:block;">
                 <input type="text" id="fWord" name="fWord" readonly required>
                 <input type="button"  id="rcrd1" class="start-record-btn">
