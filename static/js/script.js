@@ -3,6 +3,12 @@ try {
     var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     var recognition = new SpeechRecognition();
     recognition.lang = 'nl-NL';
+
+    var SpeechSynthesisUtterance = window.SpeechSynthesisUtterance || window.webkitSpeechSynthesisUtterance
+    var speechSynthesis = window.speechSynthesis || window.webkitspeechSynthesis
+    voices = speechSynthesis.getVoices();
+    speech = new SpeechSynthesisUtterance();
+    speech.lang ='nl-NL';
     }
 catch(e) {
     console.error(e);
@@ -31,7 +37,6 @@ var continueAudio = new Audio('static/sound/sOption2.mp3');
 var recordAudio = new Audio('static/sound/sOption1.mp3');
 var compared = true;
 
-
 // Voice recognition 
 
 // If false, the recording will stop after a few seconds of silence.
@@ -59,6 +64,14 @@ recognition.onresult = function(event) {
         noteTextarea.val(noteContent);
     }
 };
+
+// text to speech function, just feed it a phrase and it should talk
+function speak(phrase){
+    speech.rate = .8;
+    speech.text = phrase;
+    speechSynthesis.speak(speech);
+}
+
 
 recognition.onstart = function() { 
     instructions.text('Ik hoor je');
@@ -102,7 +115,7 @@ function comparison(){
     }
     console.log("comparison ran!")
 }
-// check that there's userINput, and display the result page
+// check that there's userinput, and display the result page
 if (userInput2 != null || NaN){
     if(window.location.href.includes("result")){
     instructions[0].innerText ="Nog een keer!";
