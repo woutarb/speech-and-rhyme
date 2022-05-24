@@ -3,7 +3,7 @@ This project is made to support learning Dutch by using practicing the language 
 This project was set up using Mozilla's speech-to-text web api and Flask to converse with a python API for Dutch rhyming. 
 
 ## Live version
-Check out the working version of this application [here](https://speechandrhyme.azurewebsites.net/).
+To be added! Hosting is not my forte.
 > Due to the speech-to-text web api not working on every browser, either make sure you're using Chrome, Android, or check compatibility [here](https://caniuse.com/?search=web%20speech%20api).
 
 ## Getting started
