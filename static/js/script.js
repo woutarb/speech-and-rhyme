@@ -43,7 +43,7 @@ var compared = true;
 // When true, the silence period is longer (about 15 seconds), don't need that with a single word
 recognition.continuous = false;
 
-// This block is called every time the Speech APi captures a line. 
+// This block is called every time the `Speech` APi captures a line. 
 recognition.onresult = function(event) {
 
     // event is a SpeechRecognitionEvent object.
@@ -75,6 +75,7 @@ function speak(phrase){
 
 recognition.onstart = function() { 
     instructions.text('Ik hoor je');
+    //speak(instructions.text);
 }
 
 recognition.onspeechend = function() {
@@ -169,16 +170,24 @@ function wordCleanup(input){
 
 //Event listeners for the form steps, to make sure they work gradually
 continueBtn1.addEventListener("click", function(){ 
-    localStorage.setItem('firstWord', wordCleanup(document.forms['userData'].elements['fWord'].value)); 
-    document.getElementById('resultH').innerHTML = 'Welk woord rijmt op ' + localStorage.getItem('firstWord') + '?';
-    document.getElementById('userData').style='display: none;';
-    document.getElementById('userData2').style='display: block;';
+    if(document.forms['userData'].elements['fWord'].value !==''){
+        localStorage.setItem('firstWord', wordCleanup(document.forms['userData'].elements['fWord'].value)); 
+        document.getElementById('resultH').innerHTML = 'Welk woord rijmt op ' + localStorage.getItem('firstWord') + '?';
+        document.getElementById('userData').style='display: none;';
+        document.getElementById('userData2').style='display: block;';
+    }else{
+        document.getElementById('resultH').innerHTML = 'Om dit te laten werken hebben we een woord nodig!';
+        }
 });
 
 continueBtn2.addEventListener("click", function(){ 
-    localStorage.setItem('secondWord', wordCleanup(document.forms['userData2'].elements['sWord'].value)); 
-    document.getElementById('userData2').style='display: none'; 
-    document.getElementById('userData3').style='display: block'; 
-    document.getElementById('resultH').innerHTML = 'Controleer nu of ' + localStorage.getItem('firstWord') + ' en ' + localStorage.getItem('secondWord') + ' rijmen!';
-    document.forms['userData3'].elements['fWord'].value=localStorage.getItem('firstWord'); 
+    if(document.forms['userData2'].elements['sWord'].value !==''){
+        localStorage.setItem('secondWord', wordCleanup(document.forms['userData2'].elements['sWord'].value)); 
+        document.getElementById('userData2').style='display: none'; 
+        document.getElementById('userData3').style='display: block'; 
+        document.getElementById('resultH').innerHTML = 'Controleer nu of ' + localStorage.getItem('firstWord') + ' en ' + localStorage.getItem('secondWord') + ' rijmen!';
+        document.forms['userData3'].elements['fWord'].value=localStorage.getItem('firstWord'); 
+    }else{
+        document.getElementById('resultH').innerHTML = 'Maar wat zou nou rijmen met ' + localStorage.getItem('firstWord') + '?';
+    }
 });
