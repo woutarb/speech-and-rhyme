@@ -2,13 +2,14 @@
 try {
     var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     var recognition = new SpeechRecognition();
-    recognition.lang = 'nl-NL';
+    recognition.lang = 'nl';
 
     var SpeechSynthesisUtterance = window.SpeechSynthesisUtterance || window.webkitSpeechSynthesisUtterance
     var speechSynthesis = window.speechSynthesis || window.webkitspeechSynthesis
-    voices = speechSynthesis.getVoices();
+    //voices = speechSynthesis.getVoices();
     speech = new SpeechSynthesisUtterance();
-    speech.lang ='nl-NL';
+    //speech.void = voices[0];
+    speech.lang ='nl';
     }
 catch(e) {
     console.error(e);
@@ -33,12 +34,11 @@ var continueBtns = document.getElementsByClassName('continue');
 var continueBtn1 = document.getElementById('nonPoster1');
 var continueBtn2 = document.getElementById('nonPoster2');
 var rcdBtns = document.getElementsByClassName('start-record-btn');
-var continueAudio = new Audio('static/sound/sOption2.mp3');
-var recordAudio = new Audio('static/sound/sOption1.mp3');
+//var continueAudio = new Audio('static/sound/sOption2.mp3');
+//var recordAudio = new Audio('static/sound/sOption1.mp3');
 var compared = true;
 
 // Voice recognition 
-
 // If false, the recording will stop after a few seconds of silence.
 // When true, the silence period is longer (about 15 seconds), don't need that with a single word
 recognition.continuous = false;
@@ -67,23 +67,29 @@ recognition.onresult = function(event) {
 
 // text to speech function, just feed it a phrase and it should talk
 function speak(phrase){
+    console.log(phrase)
     speech.rate = .8;
+    // speech.volume = ;
+    speech.pitch = .9;
     speech.text = phrase;
     speechSynthesis.speak(speech);
 }
 
 
 recognition.onstart = function() { 
+    console.log('ik werk??');
+    speak('Ik kan je horen');
     instructions.text('Ik hoor je');
-    //speak(instructions.text);
 }
 
 recognition.onspeechend = function() {
+    speak('Het was te lang stil');
     instructions.text('Te lang stil, microfoon staat uit');
 }
 
 recognition.onerror = function(event) {
     if(event.error == 'no-speech') {
+        speak('Ik hoorde je niet, probeer het nog eens');
         instructions.text('Ik hoorde je niet, probeer het nog eens');  
     };
 }
@@ -105,7 +111,6 @@ recognition.start();
 noteTextarea.on('input', function() {
     noteContent = $(this).val();
 })
-
 
 // Rhyme checker code: checks the second userInput against the invisible embed to check if it rhymes according to the API, if it's not the same word and has a place in the array of the embed; it does.
 function comparison(){
@@ -168,7 +173,7 @@ function wordCleanup(input){
     return wordEq[wordEq.length-1]
 }
 
-//Event listeners for the form steps, to make sure they work gradually
+//Event listeners for the form steps, to make sure they work gradually. They also make sure with the value of document form checkers that there has been input
 continueBtn1.addEventListener("click", function(){ 
     if(document.forms['userData'].elements['fWord'].value !==''){
         localStorage.setItem('firstWord', wordCleanup(document.forms['userData'].elements['fWord'].value)); 
