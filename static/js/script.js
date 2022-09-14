@@ -67,7 +67,6 @@ recognition.onresult = function(event) {
 
 // text to speech function, just feed it a phrase and it should talk
 function speak(phrase){
-    console.log(phrase)
     speech.rate = .8;
     // speech.volume = ;
     speech.pitch = .9;
@@ -77,7 +76,6 @@ function speak(phrase){
 
 
 recognition.onstart = function() { 
-    console.log('ik werk??');
     speak('Ik kan je horen');
     instructions.text('Ik hoor je');
 }
@@ -119,7 +117,6 @@ function comparison(){
     }else{
         return 2;
     }
-    console.log("comparison ran!")
 }
 // check that there's userinput, and display the result page
 if (userInput2 != null || NaN){
