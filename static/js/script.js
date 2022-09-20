@@ -147,7 +147,7 @@ switch(comparison()){
         resultH.innerHTML = "Helaas!"
         resultP.innerHTML = userInput2 + ' rijmt niet op ' + userInput1;
         localStorage.setItem("result", 'no')
-        document.body.style.backgroundColor = "#ed0707";
+        document.body.style.backgroundColor = "#C27342";
         document.querySelector("a").style="background-color: #a500ba; display: block;";
         compared = true;
     break;
