@@ -15,6 +15,9 @@ catch(e) {
     console.error(e);
 }
 
+// UI sounds
+var tap = new Audio('../static/sound/tap.wav');
+
 // Voice recognition variables
 var noteTextarea = $("#fWord");
 var instructionContext = 2;
@@ -29,9 +32,11 @@ var userInput2 = localStorage.getItem("secondWord");
 var result = localStorage.getItem("result");
 var form1 =document.querySelector("#userData");
 var form2 =document.querySelector("#userData2");
-var continueBtns = document.getElementsByClassName('continue');
 var continueBtn1 = document.getElementById('nonPoster1');
 var continueBtn2 = document.getElementById('nonPoster2');
+var continueBtn3 = document.getElementById('poster');
+var continueBtn4 = document.getElementById('continue');
+
 var rcdBtns = document.getElementsByClassName('start-record-btn');
 //var continueAudio = new Audio('static/sound/sOption2.mp3');
 //var recordAudio = new Audio('static/sound/sOption1.mp3');
@@ -176,6 +181,7 @@ continueBtn1.addEventListener("click", function(){
         document.getElementById('userData').style='display: none;';
         document.getElementById('userData2').style='display: block;';
         instructionContext = 3;
+        tap.play();
     }else{
         speak('Om dit te laten werken hebben we een woord nodig!');
         }
@@ -189,8 +195,8 @@ continueBtn2.addEventListener("click", function(){
         document.getElementById('resultH').innerHTML = 'Controleer nu of ' + localStorage.getItem('firstWord') + ' en ' + localStorage.getItem('secondWord') + ' rijmen!';
         document.forms['userData3'].elements['fWord'].value=localStorage.getItem('firstWord'); 
         instructionContext = 1;
+        tap.play();
     }else{
         speak('Om dit te laten werken hebben we een rijmwoord nodig voor' + localStorage.getItem('firstWord') + '!');
-
     }
 });
