@@ -17,7 +17,6 @@ catch(e) {
 
 // Voice recognition variables
 var noteTextarea = $("#fWord");
-var instructions = $("#instructions");
 var noteContent ='';
 
 // HTML and rhyme related variables
@@ -77,18 +76,15 @@ function speak(phrase){
 
 recognition.onstart = function() { 
     speak('Ik kan je horen');
-    instructions.text('Ik hoor je');
 }
 
 recognition.onspeechend = function() {
     speak('Het was te lang stil');
-    instructions.text('Te lang stil, microfoon staat uit');
 }
 
 recognition.onerror = function(event) {
     if(event.error == 'no-speech') {
         speak('Ik hoorde je niet, probeer het nog eens');
-        instructions.text('Ik hoorde je niet, probeer het nog eens');  
     };
 }
 
@@ -121,7 +117,6 @@ function comparison(){
 // check that there's userinput, and display the result page
 if (userInput2 != null || NaN){
     if(window.location.href.includes("result")){
-    instructions[0].innerText ="Nog een keer!";
     for(i=0; i< document.querySelectorAll("form").length; i++){
         document.querySelectorAll("form")[i].style="display:none;";
     }
