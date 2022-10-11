@@ -17,13 +17,13 @@ catch(e) {
 
 // Voice recognition variables
 var noteTextarea = $("#fWord");
+var instructionContext = 2;
 var noteContent ='';
 
 // HTML and rhyme related variables
 var rhymes = document.querySelector("#embed").textContent;
 var resultDiv = document.querySelector("#resultDiv");
 var resultH = document.querySelector('#resultH');
-var resultP = document.querySelector("#resultP");
 var userInput1 = localStorage.getItem("firstWord");
 var userInput2 = localStorage.getItem("secondWord");
 var result = localStorage.getItem("result");
@@ -75,16 +75,22 @@ function speak(phrase){
 
 
 recognition.onstart = function() { 
-    speak('Ik kan je horen');
+    if(instructionContext == 1){
+        speak('Zeg een woord');
+    }else if (instructionContext == 2 ){
+        speak('Wat is dit?');
+    }else if(instructionContext ==3){
+        speak('Welk woord rijmt op ' + localStorage.getItem('firstWord') + '?');
+    }
 }
 
 recognition.onspeechend = function() {
-    speak('Het was te lang stil');
+    speak('Hebbes!');
 }
 
 recognition.onerror = function(event) {
     if(event.error == 'no-speech') {
-        speak('Ik hoorde je niet, probeer het nog eens');
+        speak('Ik hoorde je niet goed, probeer het nog eens');
     };
 }
 
@@ -131,16 +137,14 @@ if (userInput2 != null || NaN){
 // switch case for displaying 'succesful' or not
 switch(comparison()){
     case 1:
-        resultH.innerHTML = "Bravo!"
-        resultP.innerHTML = userInput2 + ' rijmt op ' + userInput1;
+        resultH.style='display: block; ';
         localStorage.setItem("result", 'yes')
         document.body.style.backgroundColor = "#a500ba";
         compared = true;
     break;
 
     case 2:
-        resultH.innerHTML = "Helaas!"
-        resultP.innerHTML = userInput2 + ' rijmt niet op ' + userInput1;
+        resultH.style='display: block;   transform: scale(1, -1);' ;
         localStorage.setItem("result", 'no')
         document.body.style.backgroundColor = "#C27342";
         document.querySelector("a").style="background-color: #a500ba; display: block;";
@@ -149,8 +153,7 @@ switch(comparison()){
 
 // error case
     default:
-        resultH = "Error!"
-        resultP.innerHTML ="Er ging iets mis";
+        console.log('Error, er ging iets mis');
         localStorage.setItem("result", 'error')
         document.body.style.backgroundColor = "#FFDA00";
     break;
@@ -172,8 +175,9 @@ continueBtn1.addEventListener("click", function(){
         document.getElementById('resultH').innerHTML = 'Welk woord rijmt op ' + localStorage.getItem('firstWord') + '?';
         document.getElementById('userData').style='display: none;';
         document.getElementById('userData2').style='display: block;';
+        instructionContext = 3;
     }else{
-        document.getElementById('resultH').innerHTML = 'Om dit te laten werken hebben we een woord nodig!';
+        speak('Om dit te laten werken hebben we een woord nodig!');
         }
 });
 
@@ -184,7 +188,9 @@ continueBtn2.addEventListener("click", function(){
         document.getElementById('userData3').style='display: block'; 
         document.getElementById('resultH').innerHTML = 'Controleer nu of ' + localStorage.getItem('firstWord') + ' en ' + localStorage.getItem('secondWord') + ' rijmen!';
         document.forms['userData3'].elements['fWord'].value=localStorage.getItem('firstWord'); 
+        instructionContext = 1;
     }else{
-        document.getElementById('resultH').innerHTML = 'Maar wat zou nou rijmen met ' + localStorage.getItem('firstWord') + '?';
+        speak('Om dit te laten werken hebben we een rijmwoord nodig voor' + localStorage.getItem('firstWord') + '!');
+
     }
 });

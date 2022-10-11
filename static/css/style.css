@@ -46,15 +46,12 @@ body{
     text-align: center;
 }
 
-p{
-    color: white;
-    font-family: bello-caps;
-    font-size: 3em;
+#dragon{
+    display: none;
 }
 
-h1{
-    color: #ffda00;
-    font-family: questa-sans;
+#resultH{
+    display: none;
 }
 
 form{
