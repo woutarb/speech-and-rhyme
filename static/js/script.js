@@ -67,9 +67,9 @@ recognition.onresult = function(event) {
 
 // text to speech function, just feed it a phrase and it should talk
 function speak(phrase){
-    speech.rate = .8;
+    speech.rate = .7;
     // speech.volume = ;
-    speech.pitch = .9;
+    speech.pitch = 1.1;
     speech.text = phrase;
     speechSynthesis.speak(speech);
 }
