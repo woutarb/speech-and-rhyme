@@ -38,8 +38,6 @@ var continueBtn3 = document.getElementById('poster');
 var continueBtn4 = document.getElementById('continue');
 
 var rcdBtns = document.getElementsByClassName('start-record-btn');
-//var continueAudio = new Audio('static/sound/sOption2.mp3');
-//var recordAudio = new Audio('static/sound/sOption1.mp3');
 var compared = true;
 
 // Voice recognition 
@@ -142,9 +140,11 @@ if (userInput2 != null || NaN){
 // switch case for displaying 'succesful' or not
 switch(comparison()){
     case 1:
-        resultH.style='display: block; ';
+        resultH.style='display: block;';
         localStorage.setItem("result", 'yes')
         document.body.style.backgroundColor = "#a500ba";
+        document.getElementById('dragon').style='display: none;';
+        speak('Dat rijmt!');
         compared = true;
     break;
 
@@ -153,12 +153,14 @@ switch(comparison()){
         localStorage.setItem("result", 'no')
         document.body.style.backgroundColor = "#C27342";
         document.querySelector("a").style="background-color: #a500ba; display: block;";
+        document.getElementById('dragon').style='display: none;';
+        speak('Dat rijmt niet, jammer!');
         compared = true;
     break;
 
 // error case
     default:
-        console.log('Error, er ging iets mis');
+        speak('Error, er ging iets mis');
         localStorage.setItem("result", 'error')
         document.body.style.backgroundColor = "#FFDA00";
     break;
@@ -180,6 +182,7 @@ continueBtn1.addEventListener("click", function(){
         document.getElementById('resultH').innerHTML = 'Welk woord rijmt op ' + localStorage.getItem('firstWord') + '?';
         document.getElementById('userData').style='display: none;';
         document.getElementById('userData2').style='display: block;';
+        document.getElementById('dragon').style='display: none;';
         instructionContext = 3;
         tap.play();
     }else{
@@ -194,6 +197,7 @@ continueBtn2.addEventListener("click", function(){
         document.getElementById('userData3').style='display: block'; 
         document.getElementById('resultH').innerHTML = 'Controleer nu of ' + localStorage.getItem('firstWord') + ' en ' + localStorage.getItem('secondWord') + ' rijmen!';
         document.forms['userData3'].elements['fWord'].value=localStorage.getItem('firstWord'); 
+        document.getElementById('dragon').style='display: none;';
         instructionContext = 1;
         tap.play();
     }else{
