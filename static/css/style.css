@@ -35,7 +35,6 @@
 }
 
 body{
-    background-color: #0465a7;
     margin:0;
     text-align: center;
 }
@@ -58,40 +57,47 @@ form{
     text-align: -webkit-center;
 }
 
+#userData, #userData2{
+  background-image: url(../images/textbubble.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:90% 80%;
+
+}
+#userData, #userData2:active{
+  background-image: url(../images/textbubbleActive.png);
+
+}
+
+#userData2{
+  transform: scale(-1,1);
+}
+
+#userData2 input{
+  transform: scale(-1,1);
+}
+
 input[type=text]{
-    background-color: #0465a7;
+    background-color: transparent;
     border: none;
     color: #ffda00;
     font-size: 4em;
-    text-align: center;
-    width: 100%;
     font-family: questa-sans;
+    position: relative;
+    top: 200px;
+    text-align: center;
+    z-index: -1;
 }
 
 .start-record-btn{
-    background-image: url(../images/mic.svg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-color: #fd6b00;
+    background-color: transparent;
     background-size: 50% 50%;
-    border-radius: 50%;
     border-style: solid;
     border-color: transparent;
-    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     cursor: pointer;
     color: transparent;
     display: block;
-}
-
-.start-record-btn:hover{
-    border-width: .5em;
-    border-color: black;
-}
-
-.start-record-btn:active{
-    border-width: 1em;
-    border-color: black;
-    background-color: #ed0707;
+    width: 100%;
 }
 
 .continue{
@@ -100,12 +106,12 @@ input[type=text]{
     background-size: 60% 100%;
     background-position: center center;
     background-color: transparent;
-    border-color: white;
+    border-color: black;
     border-style: solid;
     border-width: 0.5rem;
     border-radius: 50%;
     color: transparent; 
-    margin: 3rem;
+    margin-top: 3rem;
     cursor: pointer;
 }
 

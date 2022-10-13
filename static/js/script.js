@@ -140,15 +140,18 @@ if (userInput2 != null || NaN){
 // switch case for displaying 'succesful' or not
 switch(comparison()){
     case 1:
+        tap.play();
         resultH.style='display: block;';
         localStorage.setItem("result", 'yes')
         document.body.style.backgroundColor = "#a500ba";
         document.getElementById('dragon').style='display: none;';
         speak('Dat rijmt!');
+        instructionContext = 1;
         compared = true;
     break;
 
     case 2:
+        tap.play();
         resultH.style='display: block;   transform: scale(1, -1);' ;
         localStorage.setItem("result", 'no')
         document.body.style.backgroundColor = "#C27342";
@@ -204,3 +207,10 @@ continueBtn2.addEventListener("click", function(){
         speak('Om dit te laten werken hebben we een rijmwoord nodig voor' + localStorage.getItem('firstWord') + '!');
     }
 });
+
+continueBtn3.addEventListener("click", function(){ 
+    tap.play();
+    console.log('klik1')
+});
+
+
