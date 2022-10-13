@@ -35,7 +35,7 @@ var form2 =document.querySelector("#userData2");
 var continueBtn1 = document.getElementById('nonPoster1');
 var continueBtn2 = document.getElementById('nonPoster2');
 var continueBtn3 = document.getElementById('poster');
-var continueBtn4 = document.getElementById('continue');
+var continueBtn4 = document.getElementById('back');
 
 var rcdBtns = document.getElementsByClassName('start-record-btn');
 var compared = true;
