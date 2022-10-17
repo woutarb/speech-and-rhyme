@@ -20,7 +20,14 @@ var tap = new Audio('../static/sound/tap.wav');
 
 // Voice recognition variables
 var noteTextarea = $("#fWord");
-var instructionContext = 2;
+var instructionContext;
+if(localStorage.getItem("context") == NaN || localStorage.getItem("context") == null){
+    localStorage.setItem("context", 2);
+    console.log('init')
+    instructionContext = 2;
+}else{
+    instructionContext = localStorage.getItem("context");
+}
 var noteContent ='';
 
 // HTML and rhyme related variables
@@ -36,9 +43,12 @@ var continueBtn1 = document.getElementById('nonPoster1');
 var continueBtn2 = document.getElementById('nonPoster2');
 var continueBtn3 = document.getElementById('poster');
 var continueBtn4 = document.getElementById('back');
-
 var rcdBtns = document.getElementsByClassName('start-record-btn');
 var compared = true;
+
+var responseArray = ['Welk woord rijmt op ', 'En wat rijmt er op ', 'Wat rijmt op ', 'Wat kan je rijmen met'];
+var randomResponse;
+
 
 // Voice recognition 
 // If false, the recording will stop after a few seconds of silence.
@@ -78,12 +88,31 @@ function speak(phrase){
 
 
 recognition.onstart = function() { 
-    if(instructionContext == 1){
-        speak('Zeg een woord');
-    }else if (instructionContext == 2 ){
-        speak('Wat is dit?');
-    }else if(instructionContext ==3){
-        speak('Welk woord rijmt op ' + localStorage.getItem('firstWord') + '?');
+    console.log(instructionContext)
+    if((Number(instructionContext)%2) == 1 && Number(instructionContext) !=='1'){
+        tap.play();
+        randomResponse = Math.floor(Math.random() * responseArray.length);
+        speak(responseArray[randomResponse] + localStorage.getItem('firstWord') +'?');
+        //speak('Welk woord rijmt op ' + localStorage.getItem('firstWord') +'?');
+    }else{
+        switch(Number(instructionContext)){
+            case 1:
+                tap.play();
+                speak('Zeg een woord');
+            break;
+        
+            case 2:
+                tap.play();
+                speak('Wat is dit?');
+            break;
+
+        // error case
+            default:
+                speak('Error, er ging iets mis');
+                localStorage.setItem("result", 'error');
+                document.body.style.backgroundColor = "#FFDA00";
+            break;
+        }
     }
 }
 
@@ -146,13 +175,13 @@ switch(comparison()){
         document.body.style.backgroundColor = "#a500ba";
         document.getElementById('dragon').style='display: none;';
         speak('Dat rijmt!');
-        instructionContext = 1;
         compared = true;
     break;
 
     case 2:
         tap.play();
         resultH.style='display: block;   transform: scale(1, -1);' ;
+        localStorage.setItem("context", (Number(instructionContext))-2);
         localStorage.setItem("result", 'no')
         document.body.style.backgroundColor = "#C27342";
         document.querySelector("a").style="background-color: #a500ba; display: block;";
@@ -186,7 +215,8 @@ continueBtn1.addEventListener("click", function(){
         document.getElementById('userData').style='display: none;';
         document.getElementById('userData2').style='display: block;';
         document.getElementById('dragon').style='display: none;';
-        instructionContext = 3;
+        instructionContext++;
+        localStorage.setItem("context", instructionContext);
         tap.play();
     }else{
         speak('Om dit te laten werken hebben we een woord nodig!');
@@ -201,7 +231,8 @@ continueBtn2.addEventListener("click", function(){
         document.getElementById('resultH').innerHTML = 'Controleer nu of ' + localStorage.getItem('firstWord') + ' en ' + localStorage.getItem('secondWord') + ' rijmen!';
         document.forms['userData3'].elements['fWord'].value=localStorage.getItem('firstWord'); 
         document.getElementById('dragon').style='display: none;';
-        instructionContext = 1;
+        instructionContext++;
+        localStorage.setItem("context", instructionContext);
         tap.play();
     }else{
         speak('Om dit te laten werken hebben we een rijmwoord nodig voor' + localStorage.getItem('firstWord') + '!');
@@ -210,7 +241,6 @@ continueBtn2.addEventListener("click", function(){
 
 continueBtn3.addEventListener("click", function(){ 
     tap.play();
-    console.log('klik1')
 });
 
 
