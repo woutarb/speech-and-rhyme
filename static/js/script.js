@@ -116,7 +116,7 @@ recognition.onstart = function() {
             break;
 			
             case 10:
-                speak('Bijna de code, nog een keer! Geef me een woord');
+                speak('We hebben het eerste stuk van de code, nog een keer! Geef me een woord');
             break;
 			
             case 12:
