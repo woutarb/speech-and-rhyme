@@ -88,29 +88,44 @@ function speak(phrase){
 
 
 recognition.onstart = function() { 
-    console.log(instructionContext)
+    tap.play();
     if((Number(instructionContext)%2) == 1 && Number(instructionContext) !=='1'){
-        tap.play();
         randomResponse = Math.floor(Math.random() * responseArray.length);
         speak(responseArray[randomResponse] + localStorage.getItem('firstWord') +'?');
         //speak('Welk woord rijmt op ' + localStorage.getItem('firstWord') +'?');
     }else{
         switch(Number(instructionContext)){
             case 1:
-                tap.play();
                 speak('Zeg een woord');
             break;
         
             case 2:
-                tap.play();
                 speak('Wat is dit?');
             break;
 
+            case 4:
+                speak('En deze draak heeft zin in ontbijt, wat rijmt daar op?');
+            break;
+			
+            case 6:
+                speak('De draak maakte een fout! Welk woord rijmt er op fout?');
+            break;
+			
+            case 8:
+                speak('Help het codewoord zoeken zodat de draak weer weg kan. Noem een woord!');
+            break;
+			
+            case 10:
+                speak('Bijna de code, nog een keer! Geef me een woord');
+            break;
+			
+            case 12:
+                speak('Goed zo! Kom maar met die code! We zijn er bijna. Geef me een laatste woord!');
+            break;
+			
         // error case
             default:
-                speak('Error, er ging iets mis');
-                localStorage.setItem("result", 'error');
-                document.body.style.backgroundColor = "#FFDA00";
+                speak('Zeg een woord');
             break;
         }
     }
@@ -163,8 +178,9 @@ if (userInput2 != null || NaN){
 }
 // empty cookies so it doesnt always open the results aftwards
     localStorage.removeItem("result")
-    userInput1 = wordCleanup(userInput1);
-    userInput2 = wordCleanup(userInput2);
+    localStorage.removeItem("firstWord")
+    localStorage.removeItem("secondWord")
+
 
 // switch case for displaying 'succesful' or not
 switch(comparison()){
@@ -201,6 +217,7 @@ switch(comparison()){
     localStorage.removeItem('firstWord');
     localStorage.removeItem('secondWord');
 }
+
 // Making sure the last word is grabbed, no spaces, et cetera
 function wordCleanup(input){
     wordEq =  input.trim().split(' ');
@@ -220,7 +237,7 @@ continueBtn1.addEventListener("click", function(){
         tap.play();
     }else{
         speak('Om dit te laten werken hebben we een woord nodig!');
-        }
+    }
 });
 
 continueBtn2.addEventListener("click", function(){ 
