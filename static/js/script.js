@@ -132,7 +132,7 @@ recognition.onstart = function() {
 }
 
 recognition.onspeechend = function() {
-    speak('Hebbes!');
+    speak('Ik heb je gehoord!');
 }
 
 recognition.onerror = function(event) {
