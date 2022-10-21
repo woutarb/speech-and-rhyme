@@ -42,11 +42,10 @@ var form2 =document.querySelector("#userData2");
 var continueBtn1 = document.getElementById('nonPoster1');
 var continueBtn2 = document.getElementById('nonPoster2');
 var continueBtn3 = document.getElementById('poster');
-var continueBtn4 = document.getElementById('back');
 var rcdBtns = document.getElementsByClassName('start-record-btn');
 var compared = true;
 
-var responseArray = ['Welk woord rijmt op ', 'En wat rijmt er op ', 'Wat rijmt op ', 'Wat kan je rijmen met'];
+var responseArray = ['Welk bestaand woord rijmt op ', 'Welk echt woord rijmt op '];
 var randomResponse;
 
 
@@ -202,7 +201,7 @@ switch(comparison()){
         document.body.style.backgroundColor = "#C27342";
         document.querySelector("a").style="background-color: #a500ba; display: block;";
         document.getElementById('dragon').style='display: none;';
-        speak('Dat rijmt niet, jammer!');
+        speak('Dat rijmt niet, jammer! Heb je toevallig een letter of een niet bestaand woord gebruikt?');
         compared = true;
     break;
 
@@ -245,9 +244,9 @@ continueBtn2.addEventListener("click", function(){
         localStorage.setItem('secondWord', wordCleanup(document.forms['userData2'].elements['sWord'].value)); 
         document.getElementById('userData2').style='display: none'; 
         document.getElementById('userData3').style='display: block'; 
+        document.getElementById('dragon').style='display: none;';
         document.getElementById('resultH').innerHTML = 'Controleer nu of ' + localStorage.getItem('firstWord') + ' en ' + localStorage.getItem('secondWord') + ' rijmen!';
         document.forms['userData3'].elements['fWord'].value=localStorage.getItem('firstWord'); 
-        document.getElementById('dragon').style='display: none;';
         instructionContext++;
         localStorage.setItem("context", instructionContext);
         tap.play();

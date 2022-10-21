@@ -64,10 +64,6 @@ form{
   background-size:90% 80%;
 
 }
-#userData, #userData2:active{
-  background-image: url(../images/textbubbleActive.png);
-
-}
 
 #userData2{
   transform: scale(-1,1);
