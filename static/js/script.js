@@ -103,7 +103,7 @@ recognition.onstart = function() {
             break;
 
             case 4:
-                speak('En deze draak heeft zin in ontbijt, wat rijmt daar op?');
+                speak('En deze draak heeft zin in eten, wat rijmt daar op?');
             break;
 			
             case 6:
