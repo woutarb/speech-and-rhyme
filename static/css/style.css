@@ -112,7 +112,6 @@ input[type=text]{
 }
 
 #back{
-    transform: rotate(180deg);
     margin: auto;
     display: none;
 }

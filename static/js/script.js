@@ -199,7 +199,7 @@ switch(comparison()){
         localStorage.setItem("context", (Number(instructionContext))-2);
         localStorage.setItem("result", 'no')
         document.body.style.backgroundColor = "#C27342";
-        document.querySelector("a").style="background-color: #a500ba; display: block;";
+        document.querySelector("a").style="transform: rotate(180deg), display: block;";
         document.getElementById('dragon').style='display: none;';
         speak('Dat rijmt niet, jammer! Heb je toevallig een letter of een niet bestaand woord gebruikt?');
         compared = true;
