@@ -81,8 +81,8 @@ input[type=text]{
     font-family: questa-sans;
     position: relative;
     top: 200px;
-    text-align: center;
     z-index: -1;
+    direction: rtl;
 }
 
 .start-record-btn{
