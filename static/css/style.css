@@ -80,6 +80,7 @@ input[type=text]{
     font-size: 4em;
     font-family: questa-sans;
     position: relative;
+    text-align: center;
     top: 200px;
     z-index: -1;
     direction: rtl;
