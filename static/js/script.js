@@ -189,7 +189,7 @@ switch(comparison()){
         localStorage.setItem("result", 'yes')
         document.body.style.backgroundColor = "#a500ba";
         document.getElementById('dragon').style='display: none;';
-        speak('Dat rijmt!');
+        speak('Goed zo! Dat rijmt!');
         compared = true;
     break;
 
